@@ -45,6 +45,9 @@ enum Commands {
     
     /// Verify all exercises
     Verify,
+    
+    /// Reset exercise progress by deleting the status file
+    Reset,
 }
 
 // Function to clear the console (cross-platform)
@@ -190,6 +193,27 @@ fn main() -> Result<()> {
             } else {
                 println!("\n{}", style("Some exercises failed. Keep working on them!").yellow().bold());
                 println!("Use 'rust-journey watch' to focus on the next incomplete exercise.");
+            }
+        },
+        
+        Commands::Reset => {
+            clear_console();
+            if status_path.exists() {
+                match std::fs::remove_file(status_path) {
+                    Ok(_) => {
+                        println!("{}", style("✅ Progress reset successfully!").green().bold());
+                        println!("All exercises are now marked as incomplete.");
+                        println!("\nRun 'rust-journey list' to see all exercises.");
+                    },
+                    Err(e) => {
+                        println!("{}", style("❌ Failed to reset progress:").red().bold());
+                        println!("{}", e);
+                        return Err(anyhow::anyhow!("Failed to delete status file: {}", e));
+                    }
+                }
+            } else {
+                println!("{}", style("ℹ️ No progress file found.").blue().bold());
+                println!("All exercises are already marked as incomplete.");
             }
         },
     }

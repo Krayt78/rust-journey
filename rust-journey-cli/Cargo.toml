@@ -14,3 +14,4 @@ serde = { version = "1.0", features = ["derive"] } # Serialization/deserializati
 notify = "6.1"                                     # File system notifications
 console = "0.15"                                   # Terminal styling
 indicatif = "0.17"                                 # Progress bars
+termion = "2.0"                                    # Terminal input/output
