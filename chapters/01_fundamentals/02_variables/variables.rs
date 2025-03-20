@@ -152,6 +152,7 @@ mod challenges {
 mod tests {
     use super::challenges;
     
+    #[test]
     pub fn run_challenges() -> Result<(), String> {
         println!("\nRunning Variables challenges...");
         

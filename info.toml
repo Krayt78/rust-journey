@@ -1,7 +1,7 @@
 [[exercises]]
 name = "01_hello_world/hello.rs"
 path = "chapters/01_fundamentals/01_hello_world/hello.rs"
-mode = "compile"
+mode = "test"
 hint = """
 The main function needs to be completed. Replace the TODO comment
 with code that prints "Hello, World!" to the console.
@@ -10,8 +10,8 @@ completed = false
 
 [[exercises]]
 name = "02_variables/challenge.rs"
-path = "chapters/01_fundamentals/02_variables/challenge.rs"
-mode = "compile"
+path = "chapters/01_fundamentals/02_variables/variables.rs"
+mode = "test"
 hint = """
 1. For the first error, remember that variables in Rust are immutable by default.
 2. For the second error, you need to use shadowing to change the type.
@@ -23,7 +23,7 @@ completed = false
 [[exercises]]
 name = "03_data_types/01_scalar_types/integers.rs"
 path = "chapters/01_fundamentals/03_data_types/01_scalar_types/integers.rs"
-mode = "compile"
+mode = "test"
 hint = """
 Review the types of integers in Rust and make sure you're using the appropriate
 type for each variable based on its value.
@@ -33,7 +33,7 @@ completed = false
 [[exercises]]
 name = "03_data_types/01_scalar_types/floating_point.rs"
 path = "chapters/01_fundamentals/03_data_types/01_scalar_types/floating_point.rs"
-mode = "compile"
+mode = "test"
 hint = """
 Floating point numbers in Rust can be f32 or f64. Make sure you're using
 the appropriate type and handling potential precision issues.
@@ -43,7 +43,7 @@ completed = false
 [[exercises]]
 name = "03_data_types/01_scalar_types/boolean.rs"
 path = "chapters/01_fundamentals/03_data_types/01_scalar_types/boolean.rs"
-mode = "compile"
+mode = "test"
 hint = """
 Boolean values in Rust are represented by the `bool` type and can be either
 `true` or `false`. Make sure your comparisons and boolean operations are correct.
@@ -53,7 +53,7 @@ completed = false
 [[exercises]]
 name = "03_data_types/01_scalar_types/character.rs"
 path = "chapters/01_fundamentals/03_data_types/01_scalar_types/character.rs"
-mode = "compile"
+mode = "test"
 hint = """
 Character values in Rust are represented by the `char` type using single quotes.
 They are always 4 bytes in size and represent a Unicode Scalar Value.
@@ -63,7 +63,7 @@ completed = false
 [[exercises]]
 name = "03_data_types/02_compound_types/tuples.rs"
 path = "chapters/01_fundamentals/03_data_types/02_compound_types/tuples.rs"
-mode = "compile"
+mode = "test"
 hint = """
 Tuples in Rust group values of different types. They have a fixed length and are
 accessed using dot notation (tuple.0, tuple.1). Remember you can also destructure tuples.
@@ -73,7 +73,7 @@ completed = false
 [[exercises]]
 name = "03_data_types/02_compound_types/arrays.rs"
 path = "chapters/01_fundamentals/03_data_types/02_compound_types/arrays.rs"
-mode = "compile"
+mode = "test"
 hint = """
 Arrays in Rust have a fixed length and all elements must be of the same type.
 They are accessed using square bracket notation (array[0], array[1]).

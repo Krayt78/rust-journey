@@ -88,18 +88,23 @@ fn main() {
     }
 }
 
-// CHALLENGES: Fix the broken code in this module
+// CHALLENGES: TODO: Fix the broken code in this module
 mod challenges {
-    // TODO: These character declarations have errors
-    
-    // Error 1: Using double quotes instead of single quotes for chars
-    let letter = "B";
-    
-    // Error 2: Too many characters in a char literal
-    let emoji = '😀😀';
-    
-    // Error 3: Missing escape for special character
-    let star = \u{2605};
+    // Function to demonstrate character declaration errors
+    pub fn challenge_character_declarations() -> Result<(), String> {
+        // TODO: These character declarations have errors
+        
+        // Error 1: Using double quotes instead of single quotes for chars
+        let letter = "B";
+        
+        // Error 2: Too many characters in a char literal
+        let emoji = '😀😀';
+        
+        // Error 3: Missing escape for special character
+        let star = \u{2605};
+        
+        Ok(())
+    }
     
     // TODO: This function incorrectly checks for vowels
     pub fn is_vowel(c: char) -> bool {
@@ -141,12 +146,13 @@ mod challenges {
 mod tests {
     use super::challenges;
     
+    #[test]
     pub fn run_challenges() -> Result<(), String> {
         println!("\nRunning character challenges...");
         
         // Challenge 1: Fix the character declarations
         // The code below has several errors related to character syntax
-        challenge_character_syntax()?;
+        challenges::challenge_character_declarations()?;
         
         // Challenge 2: Fix the is_vowel function
         // The function should return true for vowels (a, e, i, o, u) in any case
@@ -168,13 +174,9 @@ mod tests {
         Ok(())
     }
     
+    #[test]
     fn challenge_character_syntax() -> Result<(), String> {
-        // This is just a placeholder as the real challenge is in the challenges module
-        // The actual verification would need to be done differently since we can't access 
-        // the local variables in the challenges module directly
-        
-        // For now, we'll just return Ok
-        println!("Character syntax challenge completed!");
+        // This is now handled by the challenge_character_declarations function
         Ok(())
     }
 } 

@@ -169,6 +169,7 @@ mod challenges {
 mod tests {
     use super::challenges;
     
+    #[test]
     pub fn run_challenges() -> Result<(), String> {
         println!("\nRunning array challenges...");
         
@@ -210,6 +211,7 @@ mod tests {
         Ok(())
     }
     
+    #[test]
     fn challenge_array_basics() -> Result<(), String> {
         // This is just a placeholder as the real challenge is in the challenges module
         // The actual verification would need to be done differently since we can't access 

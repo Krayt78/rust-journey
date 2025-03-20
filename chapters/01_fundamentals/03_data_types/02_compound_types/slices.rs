@@ -159,6 +159,7 @@ mod challenges {
 mod tests {
     use super::challenges;
     
+    #[test]
     pub fn run_challenges() -> Result<(), String> {
         println!("\nRunning slice challenges...");
         
@@ -172,11 +173,11 @@ mod tests {
         if sum_result != 15 {
             return Err(format!("sum_slice returned wrong value. Expected: 15, Got: {}", sum_result));
         }
-        println!("Slice sum function works correctly!");
+        println!("sum_slice function works correctly!");
         
         // Challenge 3: Fix the find subslice function
-        let haystack = [1, 2, 3, 4, 5, 6, 7, 8];
-        let needle = [3, 4, 5];
+        let haystack = [1, 2, 3, 4, 5];
+        let needle = [3, 4];
         
         let found_at = challenges::find_subslice(&haystack, &needle);
         if found_at != Some(2) {
@@ -197,6 +198,7 @@ mod tests {
         Ok(())
     }
     
+    #[test]
     fn challenge_slice_basics() -> Result<(), String> {
         // This is just a placeholder as the real challenge is in the challenges module
         // The actual verification would need to be done differently since we can't access 

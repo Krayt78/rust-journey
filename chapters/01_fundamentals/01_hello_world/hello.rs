@@ -103,6 +103,7 @@ mod tests {
         result.map(|_| output)
     }
     
+    #[test]
     pub fn run_challenges() -> Result<(), String> {
         println!("\nRunning Hello World challenges...");
         
