@@ -11,7 +11,7 @@ Variables are a fundamental concept in any programming language. In Rust, variab
 
 ## Variable Declarations
 
-In [`variables_demo.rs`](./variables_demo.rs), you'll find examples of variable declarations:
+In [`variables.rs`](./variables.rs), you'll find examples of variable declarations and challenges:
 
 ```rust
 fn main() {
@@ -76,13 +76,32 @@ Note that:
 - Constants can be declared in any scope
 - Constants must be set to a constant expression, not a value computed at runtime
 
+## Learning Through Challenges
+
+Each file in this course has two parts:
+
+1. **Teaching Section**: The top part of each file contains working examples that demonstrate concepts with explanations in comments.
+
+2. **Challenges Module**: A module at the bottom of each file with intentionally broken code that you need to fix. These challenges test your understanding of the concepts presented in the teaching section.
+
+To complete the challenges:
+1. Read through the teaching section to understand the concepts
+2. Look at the broken code in the challenges module
+3. Fix each issue to make the code compile and run correctly
+4. The code contains validations that will tell you if your fixes are correct
+
 ## Practice Exercise
 
-Open [`challenge.rs`](./challenge.rs) and complete the challenges related to variables:
+Open [`variables.rs`](./variables.rs) and complete the challenges related to variables:
 
-1. Fix the code to make it compile
-2. Experiment with variable shadowing
-3. Define appropriate constants
+1. Fix the code to make it compile and run correctly
+2. Solve the various challenges related to:
+   - Variable mutability
+   - Shadowing
+   - Constants
+   - Type changes through shadowing
+
+Run the program to verify that your solutions pass all the tests.
 
 ## What's Next?
 
