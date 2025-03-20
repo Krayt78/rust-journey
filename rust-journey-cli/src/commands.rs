@@ -1,9 +1,6 @@
 use anyhow::{Context, Result};
 use console::{style, Term};
-use notify::{Config, Event, EventKind, RecursiveMode, Watcher};
 use std::path::Path;
-use std::sync::mpsc::channel;
-use std::time::Duration;
 
 use crate::exercise::Exercise;
 
