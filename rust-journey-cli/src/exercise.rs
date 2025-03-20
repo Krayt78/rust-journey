@@ -1,4 +1,5 @@
 use anyhow::{Context, Result};
+use console::style;
 use serde::Deserialize;
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -20,6 +21,20 @@ pub enum Mode {
     Test,
 }
 
+// Function to clear the console (cross-platform)
+fn clear_console() {
+    if cfg!(target_os = "windows") {
+        // For Windows
+        let _ = Command::new("cmd")
+            .args(["/c", "cls"])
+            .status();
+    } else {
+        // For Unix-like systems (Linux, macOS)
+        let _ = Command::new("clear")
+            .status();
+    }
+}
+
 impl Exercise {
     // Verify if the exercise compiles or passes tests
     pub fn verify(&self, base_path: &Path) -> Result<bool> {
@@ -27,7 +42,7 @@ impl Exercise {
         
         match self.mode {
             Mode::Compile => {
-                println!("Compiling {}...", self.name);
+                println!("{}", style(format!("Compiling {}...", self.name)).cyan().bold());
                 let output = Command::new("rustc")
                     .arg("--edition=2021")
                     .arg(&full_path)
@@ -35,16 +50,16 @@ impl Exercise {
                     .context(format!("Failed to execute rustc on {}", full_path.display()))?;
                 
                 if output.status.success() {
-                    println!("Successfully compiled {}", self.name);
+                    println!("{}", style(format!("✅ Successfully compiled {}", self.name)).green().bold());
                     Ok(true)
                 } else {
-                    println!("Failed to compile {}:", self.name);
+                    println!("{}", style(format!("❌ Failed to compile {}:", self.name)).red().bold());
                     println!("{}", String::from_utf8_lossy(&output.stderr));
                     Ok(false)
                 }
             },
             Mode::Test => {
-                println!("Testing {}...", self.name);
+                println!("{}", style(format!("Testing {}...", self.name)).cyan().bold());
                 let output = Command::new("rustc")
                     .arg("--edition=2021")
                     .arg("--test")
@@ -53,7 +68,7 @@ impl Exercise {
                     .context(format!("Failed to compile test for {}", full_path.display()))?;
                 
                 if !output.status.success() {
-                    println!("Failed to compile test for {}:", self.name);
+                    println!("{}", style(format!("❌ Failed to compile test for {}:", self.name)).red().bold());
                     println!("{}", String::from_utf8_lossy(&output.stderr));
                     return Ok(false);
                 }
@@ -68,10 +83,10 @@ impl Exercise {
                 std::fs::remove_file(test_executable).ok();
                 
                 if run_output.status.success() {
-                    println!("Tests passed for {}", self.name);
+                    println!("{}", style(format!("✅ Tests passed for {}", self.name)).green().bold());
                     Ok(true)
                 } else {
-                    println!("Tests failed for {}:", self.name);
+                    println!("{}", style(format!("❌ Tests failed for {}:", self.name)).red().bold());
                     println!("{}", String::from_utf8_lossy(&run_output.stdout));
                     Ok(false)
                 }
@@ -81,7 +96,7 @@ impl Exercise {
     
     // Show hint for the exercise
     pub fn show_hint(&self) {
-        println!("Hint for {}:", self.name);
+        println!("{}", style(format!("Hint for {}:", self.name)).yellow().bold());
         println!("{}", self.hint);
     }
 }

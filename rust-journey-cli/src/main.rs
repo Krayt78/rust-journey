@@ -3,7 +3,9 @@ mod exercise;
 
 use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
+use console::style;
 use std::path::{Path, PathBuf};
+use std::process::Command;
 
 use crate::commands::{find_next_exercise, list_exercises, load_exercise_status, run_exercise, save_exercise_status, show_hint, watch_exercise};
 use crate::exercise::load_exercises;
@@ -45,6 +47,20 @@ enum Commands {
     Verify,
 }
 
+// Function to clear the console (cross-platform)
+fn clear_console() {
+    if cfg!(target_os = "windows") {
+        // For Windows
+        let _ = Command::new("cmd")
+            .args(["/c", "cls"])
+            .status();
+    } else {
+        // For Unix-like systems (Linux, macOS)
+        let _ = Command::new("clear")
+            .status();
+    }
+}
+
 fn main() -> Result<()> {
     let cli = Cli::parse();
     
@@ -56,11 +72,11 @@ fn main() -> Result<()> {
     
     // Check if info.toml exists before proceeding
     if !info_path.exists() {
-        return Err(anyhow::anyhow!(
-            "Could not find info.toml in the current directory. \
-             Please run this command from the project root directory, \
-             not from inside the rust-journey-cli directory."
-        ));
+        clear_console();
+        eprintln!("{}", style("ERROR: Could not find info.toml in the current directory.").red().bold());
+        eprintln!("{}", style("Please run this command from the project root directory, not from inside the rust-journey-cli directory.").yellow());
+        eprintln!("\nIf you're in the rust-journey-cli directory, try: cd .. && rust-journey [command]");
+        return Err(anyhow::anyhow!("info.toml not found"));
     }
     
     // Path to the status file
@@ -98,16 +114,22 @@ fn main() -> Result<()> {
         },
         
         Commands::Next => {
-            let exercise_index = find_next_exercise(&exercises)
-                .context("No incomplete exercises found")?;
+            let exercise_index = find_next_exercise(&exercises);
             
-            let exercise = &mut exercises[exercise_index];
-            let completed = run_exercise(exercise, &base_path)?;
-            
-            if completed {
-                exercise.completed = true;
-                save_exercise_status(&exercises, status_path)?;
-                println!("Exercise completed!");
+            if let Some(index) = exercise_index {
+                let exercise = &mut exercises[index];
+                let completed = run_exercise(exercise, &base_path)?;
+                
+                if completed {
+                    exercise.completed = true;
+                    save_exercise_status(&exercises, status_path)?;
+                    println!("{}", style("Exercise completed!").green().bold());
+                }
+            } else {
+                clear_console();
+                println!("{}", style("🎉 All exercises completed! Congratulations! 🎉").green().bold());
+                println!("\nYou've completed all exercises in the Rust Journey course!");
+                println!("\nIf you want to reset your progress and start over, you can delete the .rust-journey-status file.");
             }
         },
         
@@ -131,20 +153,27 @@ fn main() -> Result<()> {
         },
         
         Commands::Watch => {
-            let exercise_index = find_next_exercise(&exercises)
-                .context("No incomplete exercises found")?;
+            let exercise_index = find_next_exercise(&exercises);
             
-            watch_exercise(exercise_index, &mut exercises, &base_path, status_path)?;
+            if let Some(index) = exercise_index {
+                watch_exercise(index, &mut exercises, &base_path, status_path)?;
+            } else {
+                clear_console();
+                println!("{}", style("🎉 All exercises completed! Congratulations! 🎉").green().bold());
+                println!("\nYou've completed all exercises in the Rust Journey course!");
+                println!("\nIf you want to reset your progress and start over, you can delete the .rust-journey-status file.");
+            }
         },
         
         Commands::Verify => {
-            println!("Verifying all exercises...");
+            clear_console();
+            println!("{}", style("Verifying all exercises...").cyan().bold());
             let mut all_passing = true;
             let total_exercises = exercises.len();
             
             for i in 0..total_exercises {
                 let exercise = &mut exercises[i];
-                println!("\nExercise {}/{}: {}", i + 1, total_exercises, exercise.name);
+                println!("\n{}", style(format!("Exercise {}/{}: {}", i + 1, total_exercises, exercise.name)).blue());
                 let passed = run_exercise(exercise, &base_path)?;
                 
                 if passed {
@@ -157,9 +186,10 @@ fn main() -> Result<()> {
             save_exercise_status(&exercises, status_path)?;
             
             if all_passing {
-                println!("\nAll exercises pass! Congratulations!");
+                println!("\n{}", style("🎉 All exercises pass! Congratulations! 🎉").green().bold());
             } else {
-                println!("\nSome exercises failed. Keep working on them!");
+                println!("\n{}", style("Some exercises failed. Keep working on them!").yellow().bold());
+                println!("Use 'rust-journey watch' to focus on the next incomplete exercise.");
             }
         },
     }

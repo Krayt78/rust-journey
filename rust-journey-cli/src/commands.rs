@@ -1,23 +1,41 @@
 use anyhow::{Context, Result};
 use console::{style, Term};
 use std::path::Path;
+use std::process::Command;
 
 use crate::exercise::Exercise;
 
+// Function to clear the console (cross-platform)
+fn clear_console() {
+    if cfg!(target_os = "windows") {
+        // For Windows
+        let _ = Command::new("cmd")
+            .args(["/c", "cls"])
+            .status();
+    } else {
+        // For Unix-like systems (Linux, macOS)
+        let _ = Command::new("clear")
+            .status();
+    }
+}
+
 // Run a single exercise
 pub fn run_exercise(exercise: &Exercise, base_path: &Path) -> Result<bool> {
+    clear_console();
     println!("{}", style(format!("Running exercise: {}", exercise.name)).bold());
     exercise.verify(base_path)
 }
 
 // Show hint for an exercise
 pub fn show_hint(exercise: &Exercise) -> Result<()> {
+    clear_console();
     exercise.show_hint();
     Ok(())
 }
 
 // List all exercises with their status
 pub fn list_exercises(exercises: &[Exercise]) -> Result<()> {
+    clear_console();
     println!("{}", style("Rust Journey Exercises:").bold().underlined());
     println!();
     
@@ -91,12 +109,49 @@ pub fn watch_exercise(exercise_index: usize, exercises: &mut Vec<Exercise>, base
         ));
     }
     
-    let exercise = &mut exercises[exercise_index];
-    let file_to_watch = base_path.join(&exercise.path);
+    // Get exercise name first before borrowing mutably
+    let exercise_name = exercises[exercise_index].name.clone();
+    let file_to_watch = base_path.join(&exercises[exercise_index].path);
     let parent_dir = file_to_watch.parent().unwrap_or(Path::new("."));
     
-    println!("{}", style(format!("Watching exercise: {}", exercise.name)).bold());
+    clear_console();
+    println!("{}", style(format!("Watching exercise: {}", exercise_name)).bold());
     println!("Press 'q' to quit, 'h' for hint, 'l' for list, 'n' for next exercise");
+    
+    // Immediately verify the exercise upon entering watch mode
+    println!("\n{}", style("Initial verification:").cyan().bold());
+    // Need to scope the mutable borrow
+    let completed = {
+        let exercise = &mut exercises[exercise_index];
+        let result = exercise.verify(base_path)?;
+        if result {
+            exercise.completed = true;
+        }
+        result
+    };
+    
+    // Check if it's already completed on first try
+    if completed {
+        save_exercise_status(exercises, status_path)?;
+        
+        if let Some(next_idx) = find_next_exercise(exercises) {
+            println!("{}", style("Exercise completed! Move to next? [y/n]").green().bold());
+            let term = Term::stdout();
+            if let Ok(key) = term.read_char() {
+                if key == 'y' {
+                    return watch_exercise(next_idx, exercises, base_path, status_path);
+                }
+            }
+        } else {
+            println!("{}", style("All exercises completed! Congratulations!").green().bold());
+            println!("Press any key to exit...");
+            let term = Term::stdout();
+            let _ = term.read_char();
+            return Ok(());
+        }
+    }
+    
+    println!("\n{}", style("Watching for changes...").dim());
     
     // Set up the channel for file event notifications
     let (tx, rx) = channel();
@@ -130,9 +185,21 @@ pub fn watch_exercise(exercise_index: usize, exercises: &mut Vec<Exercise>, base
         // Check for file changes
         match rx.try_recv() {
             Ok(event) if matches!(event.kind, notify::EventKind::Modify(_)) => {
-                let exercise = &mut exercises[exercise_index];
-                if exercise.verify(base_path)? {
-                    exercise.completed = true;
+                clear_console();
+                println!("{}", style("File changed! Verifying...").cyan().bold());
+                
+                // Need to scope the mutable borrow
+                let completed = {
+                    let exercise = &mut exercises[exercise_index];
+                    let result = exercise.verify(base_path)?;
+                    if result {
+                        exercise.completed = true;
+                    }
+                    result
+                };
+                
+                // Only use immutable references after the mutable borrow is done
+                if completed {
                     save_exercise_status(exercises, status_path)?;
                     
                     if let Some(next_idx) = find_next_exercise(exercises) {
@@ -141,11 +208,18 @@ pub fn watch_exercise(exercise_index: usize, exercises: &mut Vec<Exercise>, base
                             if key == 'y' {
                                 return watch_exercise(next_idx, exercises, base_path, status_path);
                             }
+                            // If not moving to next, refresh the display
+                            clear_console();
+                            println!("{}", style(format!("Watching exercise: {}", exercise_name)).bold());
+                            println!("Press 'q' to quit, 'h' for hint, 'l' for list, 'n' for next exercise");
                         }
                     } else {
                         println!("{}", style("All exercises completed! Congratulations!").green().bold());
                         return Ok(());
                     }
+                } else {
+                    // After verification fails, remind user about the watch mode commands
+                    println!("\nPress 'q' to quit, 'h' for hint, 'l' for list, 'n' for next exercise");
                 }
             },
             Err(std::sync::mpsc::TryRecvError::Empty) => {
@@ -161,20 +235,27 @@ pub fn watch_exercise(exercise_index: usize, exercises: &mut Vec<Exercise>, base
         if let Ok(key) = term.read_char() {
             match key {
                 'q' => {
+                    clear_console();
                     println!("Exiting watch mode");
                     break;
                 },
                 'h' => {
+                    clear_console();
                     exercises[exercise_index].show_hint();
+                    println!("\nPress 'q' to quit, 'h' for hint, 'l' for list, 'n' for next exercise");
                 },
                 'l' => {
+                    clear_console();
                     list_exercises(exercises)?;
+                    println!("\nPress 'q' to quit, 'h' for hint, 'l' for list, 'n' for next exercise");
                 },
                 'n' => {
                     if let Some(next_idx) = find_next_exercise(exercises) {
                         return watch_exercise(next_idx, exercises, base_path, status_path);
                     } else {
-                        println!("No more exercises to complete!");
+                        clear_console();
+                        println!("{}", style("No more exercises to complete!").yellow().bold());
+                        println!("\nPress 'q' to quit");
                     }
                 },
                 _ => {}
