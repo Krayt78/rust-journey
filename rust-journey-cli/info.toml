@@ -1,0 +1,46 @@
+[[exercises]]
+name = "01_hello_world/hello.rs"
+path = "chapters/01_fundamentals/01_hello_world/hello.rs"
+mode = "compile"
+hint = """
+The main function needs to be completed. Replace the TODO comment
+with code that prints "Hello, World!" to the console.
+"""
+
+[[exercises]]
+name = "02_variables/challenge.rs"
+path = "chapters/01_fundamentals/02_variables/challenge.rs"
+mode = "compile"
+hint = """
+1. For the first error, remember that variables in Rust are immutable by default.
+2. For the second error, you need to use shadowing to change the type.
+3. For the third error, you need to define a constant with the correct syntax.
+4. For the final error, think about variable shadowing again.
+"""
+
+[[exercises]]
+name = "03_data_types/01_scalar_types/integers.rs"
+path = "chapters/01_fundamentals/03_data_types/01_scalar_types/integers.rs"
+mode = "compile"
+hint = """
+Review the types of integers in Rust and make sure you're using the appropriate
+type for each variable based on its value.
+"""
+
+[[exercises]]
+name = "03_data_types/01_scalar_types/floating_point.rs"
+path = "chapters/01_fundamentals/03_data_types/01_scalar_types/floating_point.rs"
+mode = "compile"
+hint = """
+Floating point numbers in Rust can be f32 or f64. Make sure you're using
+the appropriate type and handling potential precision issues.
+"""
+
+[[exercises]]
+name = "03_data_types/01_scalar_types/boolean.rs"
+path = "chapters/01_fundamentals/03_data_types/01_scalar_types/boolean.rs"
+mode = "compile"
+hint = """
+Boolean values in Rust are represented by the `bool` type and can be either
+`true` or `false`. Make sure your comparisons and boolean operations are correct.
+""" 
