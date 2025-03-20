@@ -48,17 +48,26 @@ Thank you for considering contributing to Rust Journey! This document provides g
 
 ### For CLI Tool
 
-1. Navigate to the CLI tool directory:
+1. From the project root directory, build and test the CLI tool:
    ```bash
-   cd rust-journey/rust-journey-cli
+   # Build the CLI tool
+   cargo build --manifest-path=rust-journey-cli/Cargo.toml
+   
+   # Run a command (always from the project root)
+   ./rust-journey-cli/target/debug/rust-journey-cli list
    ```
 
-2. Make your changes to the CLI code
-
-3. Build and test:
+2. After making changes to the CLI code, you can install it locally:
    ```bash
-   cargo build
-   cargo run -- list  # Test the list command
+   # Install to your ~/.cargo/bin
+   ./install.sh
+   ```
+
+3. **Important**: Always run the CLI tool from the project root directory, not from inside the `rust-journey-cli` directory. The tool expects to find files relative to the project root.
+
+   ```bash
+   # You can use the wrapper script for extra protection
+   ./rust-journey-wrapper.sh list
    ```
 
 ## Pull Request Process

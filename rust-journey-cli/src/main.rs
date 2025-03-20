@@ -54,6 +54,15 @@ fn main() -> Result<()> {
     // Path to the info.toml file
     let info_path = Path::new("info.toml");
     
+    // Check if info.toml exists before proceeding
+    if !info_path.exists() {
+        return Err(anyhow::anyhow!(
+            "Could not find info.toml in the current directory. \
+             Please run this command from the project root directory, \
+             not from inside the rust-journey-cli directory."
+        ));
+    }
+    
     // Path to the status file
     let status_path = Path::new(".rust-journey-status");
     

@@ -37,21 +37,17 @@ This course includes a CLI tool that guides you through the exercises and provid
 
 #### Option 1: Quick Install (Recommended)
 
-Run the installation script:
+Run the installation script from the project root:
 
 ```bash
 # Clone the repository
 git clone https://github.com/krayt78/rust-journey.git
-cd rust-journey/rust-journey-cli
+cd rust-journey
 
-# Install the CLI tool
-./install.sh
+# Install the CLI tool directly from the project root
+cargo build --release --manifest-path=rust-journey-cli/Cargo.toml
+cp rust-journey-cli/target/release/rust-journey-cli ~/.cargo/bin/rust-journey
 ```
-
-This will:
-1. Build the CLI tool
-2. Install it to your `~/.cargo/bin` directory
-3. Set up the necessary configuration files
 
 #### Option 2: Manual Installation
 
@@ -60,19 +56,18 @@ If you prefer to install manually:
 ```bash
 # Clone the repository
 git clone https://github.com/YOUR_GITHUB_USERNAME/rust-journey.git
-cd rust-journey/rust-journey-cli
+cd rust-journey
 
-# Build the CLI tool
-cargo build --release
+# Build the CLI tool from the root directory
+cargo build --release --manifest-path=rust-journey-cli/Cargo.toml
 
 # Install it (assumes ~/.cargo/bin is in your PATH)
-cp target/release/rust-journey-cli ~/.cargo/bin/rust-journey
-
-# Copy the configuration file
-cp info.toml ~/rust-journey/
+cp rust-journey-cli/target/release/rust-journey-cli ~/.cargo/bin/rust-journey
 ```
 
 ### Using the CLI Tool
+
+**Important**: Always run the CLI tool from the project root directory, not from within the `rust-journey-cli` folder.
 
 Once installed, you can use the following commands:
 
@@ -96,11 +91,27 @@ rust-journey run "exercise_name"
 rust-journey verify
 ```
 
+#### Using the Wrapper Script (Alternative)
+
+If you've accidentally been running commands from inside the `rust-journey-cli` directory, we've included a wrapper script that can help. From the project root, run:
+
+```bash
+# Make the wrapper script executable (if you haven't already)
+chmod +x rust-journey-wrapper.sh
+
+# Use the wrapper script which automatically checks for the correct directory
+./rust-journey-wrapper.sh list
+./rust-journey-wrapper.sh watch
+# etc.
+```
+
 ### Watch Mode (Recommended)
 
 The most effective way to work through the exercises is using the watch mode:
 
 ```bash
+# Make sure you're in the project root directory
+cd /path/to/rust-journey
 rust-journey watch
 ```
 

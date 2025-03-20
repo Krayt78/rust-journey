@@ -1,6 +1,6 @@
 use anyhow::{Context, Result};
 use console::{style, Term};
-use notify::{Config, Event, EventHandler, EventKind, Watcher, RecommendedWatcher};
+use notify::{Config, Event, EventKind, RecursiveMode, Watcher};
 use std::path::Path;
 use std::sync::mpsc::channel;
 use std::time::Duration;
@@ -78,42 +78,61 @@ pub fn load_exercise_status(exercises: &mut [Exercise], path: &Path) -> Result<(
     Ok(())
 }
 
-// Handler for file events
-struct FileEventHandler {
-    tx: std::sync::mpsc::Sender<Event>,
-}
-
-impl EventHandler for FileEventHandler {
-    fn handle_event(&mut self, event: notify::Result<Event>) {
-        if let Ok(event) = event {
-            let _ = self.tx.send(event);
-        }
-    }
-}
-
-// Watch for file changes and verify the current exercise
+// Watch for changes to exercise files
 pub fn watch_exercise(exercise_index: usize, exercises: &mut Vec<Exercise>, base_path: &Path, status_path: &Path) -> Result<()> {
-    let (tx, rx) = channel();
+    use notify::{Config, RecursiveMode, Watcher};
+    use std::sync::mpsc::channel;
+    use std::time::Duration;
+    use console::style;
     
-    let event_handler = FileEventHandler { tx };
-    let mut watcher: RecommendedWatcher = Watcher::new(event_handler, Config::default())
-        .context("Failed to create file watcher")?;
+    // Check if info.toml exists
+    if !Path::new("info.toml").exists() {
+        return Err(anyhow::anyhow!(
+            "Could not find info.toml in the current directory. \
+             Please run this command from the project root directory, \
+             not from inside the rust-journey-cli directory."
+        ));
+    }
     
-    let exercise = &exercises[exercise_index];
+    let exercise = &mut exercises[exercise_index];
     let file_to_watch = base_path.join(&exercise.path);
-    
-    watcher.watch(file_to_watch.parent().unwrap_or(Path::new(".")), notify::RecursiveMode::Recursive)
-        .context("Failed to watch directory")?;
+    let parent_dir = file_to_watch.parent().unwrap_or(Path::new("."));
     
     println!("{}", style(format!("Watching exercise: {}", exercise.name)).bold());
     println!("Press 'q' to quit, 'h' for hint, 'l' for list, 'n' for next exercise");
+    
+    // Set up the channel for file event notifications
+    let (tx, rx) = channel();
+    
+    // Create an event handler
+    struct FileEventHandler {
+        tx: std::sync::mpsc::Sender<notify::Event>,
+    }
+    
+    impl notify::EventHandler for FileEventHandler {
+        fn handle_event(&mut self, event: std::result::Result<notify::Event, notify::Error>) {
+            if let Ok(event) = event {
+                let _ = self.tx.send(event);
+            }
+        }
+    }
+    
+    let event_handler = FileEventHandler { tx };
+    
+    // Create the watcher with explicit type annotation
+    let mut watcher: notify::RecommendedWatcher = notify::Watcher::new(event_handler, Config::default())
+        .context("Failed to create file watcher")?;
+    
+    // Watch the directory
+    watcher.watch(parent_dir, RecursiveMode::Recursive)
+        .context("Failed to watch directory")?;
     
     let term = Term::stdout();
     
     loop {
         // Check for file changes
         match rx.try_recv() {
-            Ok(event) if matches!(event.kind, EventKind::Modify(_)) => {
+            Ok(event) if matches!(event.kind, notify::EventKind::Modify(_)) => {
                 let exercise = &mut exercises[exercise_index];
                 if exercise.verify(base_path)? {
                     exercise.completed = true;
@@ -132,8 +151,11 @@ pub fn watch_exercise(exercise_index: usize, exercises: &mut Vec<Exercise>, base
                     }
                 }
             },
-            Err(_) => {
-                // No file change event
+            Err(std::sync::mpsc::TryRecvError::Empty) => {
+                // No file change event, this is normal
+            },
+            Err(std::sync::mpsc::TryRecvError::Disconnected) => {
+                return Err(anyhow::anyhow!("File watcher disconnected unexpectedly"));
             },
             _ => {}
         }
