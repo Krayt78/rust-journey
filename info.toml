@@ -6,6 +6,7 @@ hint = """
 The main function needs to be completed. Replace the TODO comment
 with code that prints "Hello, World!" to the console.
 """
+completed = false
 
 [[exercises]]
 name = "02_variables/challenge.rs"
@@ -17,6 +18,7 @@ hint = """
 3. For the third error, you need to define a constant with the correct syntax.
 4. For the final error, think about variable shadowing again.
 """
+completed = false
 
 [[exercises]]
 name = "03_data_types/01_scalar_types/integers.rs"
@@ -26,6 +28,7 @@ hint = """
 Review the types of integers in Rust and make sure you're using the appropriate
 type for each variable based on its value.
 """
+completed = false
 
 [[exercises]]
 name = "03_data_types/01_scalar_types/floating_point.rs"
@@ -35,6 +38,7 @@ hint = """
 Floating point numbers in Rust can be f32 or f64. Make sure you're using
 the appropriate type and handling potential precision issues.
 """
+completed = false
 
 [[exercises]]
 name = "03_data_types/01_scalar_types/boolean.rs"
@@ -43,4 +47,5 @@ mode = "compile"
 hint = """
 Boolean values in Rust are represented by the `bool` type and can be either
 `true` or `false`. Make sure your comparisons and boolean operations are correct.
-""" 
+"""
+completed = false 

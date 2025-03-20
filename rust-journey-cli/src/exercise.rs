@@ -91,15 +91,23 @@ pub fn load_exercises(path: &Path) -> Result<Vec<Exercise>> {
     let content = std::fs::read_to_string(path)
         .context(format!("Failed to read exercises file at {}", path.display()))?;
     
-    let exercises: toml::Table = toml::from_str(&content)
+    // Direct approach using from_str for the whole file
+    let config: toml::Table = toml::from_str(&content)
         .context("Failed to parse TOML content")?;
     
-    let exercises = exercises.get("exercises")
-        .context("No 'exercises' field in TOML file")?
-        .clone();
+    let exercises = config.get("exercises")
+        .context("No 'exercises' field in TOML file")?;
     
-    let exercises: Vec<Exercise> = toml::from_str(&toml::to_string(&exercises)?)
-        .context("Failed to parse exercises from TOML")?;
+    // Convert to Vec<Exercise> directly
+    let exercises: Vec<Exercise> = match exercises {
+        toml::Value::Array(arr) => {
+            arr.iter()
+                .map(|val| toml::from_str(&toml::to_string(val).unwrap()))
+                .collect::<std::result::Result<Vec<Exercise>, _>>()
+                .context("Failed to parse exercises from TOML")?
+        },
+        _ => return Err(anyhow::anyhow!("'exercises' is not an array")),
+    };
     
     Ok(exercises)
 } 

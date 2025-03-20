@@ -24,7 +24,7 @@ mkdir -p "$COURSE_DIR"
 if [ ! -d "$COURSE_DIR/chapters" ]; then
     echo "Cloning course repository..."
     # TODO: Replace with your actual GitHub username and repository name
-    git clone https://github.com/YOUR_GITHUB_USERNAME/rust-journey.git "$COURSE_DIR"
+    git clone https://github.com/krayt78/rust-journey.git "$COURSE_DIR"
 else
     echo "Course files already exist, skipping clone."
 fi
