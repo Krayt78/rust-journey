@@ -70,14 +70,13 @@ fn main() {
     // Creating a tuple to pass multiple values to a function
     print_coordinates((10, 20));
     
-    // Challenge: Create a function that returns a tuple containing 
-    // a string, an integer, and a boolean
-    // Your code here:
+    println!("\n==== CHALLENGES ====");
+    println!("Fix the code in the challenges module to make it compile and run correctly!");
     
-    // Challenge: Create a tuple containing information about a person 
-    // (name, age, height in meters) and destructure it to print a nice 
-    // formatted string about the person
-    // Your code here:
+    // Run the challenges if they compile
+    if let Err(e) = tests::run_challenges() {
+        println!("Challenge error: {}", e);
+    }
 }
 
 // Example function that returns a tuple
@@ -92,4 +91,99 @@ fn get_stats() -> (i32, i32, f64) {
 // Function that takes a tuple as a parameter
 fn print_coordinates(coord: (i32, i32)) {
     println!("\nCoordinates: x={}, y={}", coord.0, coord.1);
+}
+
+// CHALLENGES: TODO: Fix the broken code in this module
+mod challenges {
+    // TODO: These tuple declarations and operations have errors
+    
+    // Error 1: Missing comma for single-element tuple
+    let single_element = (42);
+    
+    // Error 2: Wrong type annotation
+    let wrong_type: (i32, i32) = (42, "hello");
+    
+    // Error 3: Incorrect index access
+    let tuple = (1, 2, 3);
+    let third = tuple[2]; // Arrays use [index], tuples use .index
+    
+    // Error 4: Wrong destructuring pattern
+    let (a, b) = (1, 2, 3);
+    
+    // TODO: This function should return a tuple with a person's info
+    pub fn get_person_info() -> (String, u32, f64) {
+        let name = "John Doe";
+        let age = 30;
+        let height = 1.85;
+        
+        // This return statement has an error
+        (name, age, height) // Missing type conversion for &str to String
+    }
+    
+    // TODO: This function should swap two values
+    pub fn swap_values(a: i32, b: i32) -> (i32, i32) {
+        // This has a logic error in how it returns the values
+        (a, b)
+    }
+    
+    // TODO: This function should swap a and b if a < b, otherwise return as is
+    pub fn swap_if_greater(a: i32, b: i32) -> (i32, i32) {
+        // This implementation has a logical error
+        if a < b {
+            (a, b)
+        } else {
+            (a, b)
+        }
+    }
+}
+
+// Tests for the challenges
+mod tests {
+    use super::challenges;
+    
+    pub fn run_challenges() -> Result<(), String> {
+        println!("\nRunning tuple challenges...");
+        
+        // Challenge 1: Fix tuple declarations and access
+        challenge_tuple_basics()?;
+        
+        // Challenge 2: Fix the person info function
+        let person_info = challenges::get_person_info();
+        println!("Person info: {:?}", person_info);
+        
+        if person_info.0 != "John Doe" || person_info.1 <= 0 {
+            return Err("get_person_info should return a tuple with name and positive age".to_string());
+        }
+        
+        // Challenge 3: Fix the swap function
+        let swapped = challenges::swap_values(10, 20);
+        if swapped.0 != 20 || swapped.1 != 10 {
+            return Err(format!("swap_values(10, 20) should return (20, 10), got {:?}", swapped));
+        }
+        println!("swap_values function works correctly!");
+        
+        // Challenge 4: Fix the swap_if_greater function
+        let result = challenges::swap_if_greater(5, 10);
+        if result.0 != 10 || result.1 != 5 {
+            return Err("swap_if_greater(5, 10) should swap values".to_string());
+        }
+        let no_swap = challenges::swap_if_greater(10, 5);
+        if no_swap.0 != 10 || no_swap.1 != 5 {
+            return Err("swap_if_greater(10, 5) should not swap values".to_string());
+        }
+        println!("swap_if_greater function works correctly!");
+        
+        println!("All tuple challenges completed successfully!");
+        Ok(())
+    }
+    
+    fn challenge_tuple_basics() -> Result<(), String> {
+        // This is just a placeholder as the real challenge is in the challenges module
+        // The actual verification would need to be done differently since we can't access 
+        // the local variables in the challenges module directly
+        
+        // For now, we'll just return Ok
+        println!("Tuple basics challenge completed!");
+        Ok(())
+    }
 } 

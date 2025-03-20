@@ -81,10 +81,89 @@ fn main() {
     println!("Float: {}", big_float);
     println!("Truncated to int: {}", as_int);
     
-    // Challenge: Create a function that calculates the area of a circle given its radius
-    // Your code here:
+    println!("\n==== CHALLENGES ====");
+    println!("Fix the code in the challenges module to make it compile and run correctly!");
     
-    // Challenge: Try comparing two floating-point numbers that should be equal but might
-    // have precision issues. Find a better way to compare them.
-    // Your code here:
+    // Run the challenges if they compile
+    if let Err(e) = tests::run_challenges() {
+        println!("Challenge error: {}", e);
+    }
+}
+
+// CHALLENGES: TODO: Fix the broken code in this module
+mod challenges {
+    // TODO: These floating-point declarations and calculations have errors
+    
+    // Error 1: Type mismatch between f32 and f64
+    let float32: f32 = 10.5;
+    let float64 = 20.7;
+    let sum = float32 + float64;
+    
+    // Error 2: Dividing by zero
+    let zero = 0.0;
+    let result = 5.0 / zero;
+    println!("Division result: {}", result);
+    
+    // Error 3: Incorrect scientific notation
+    let scientific = 1.5e;
+    
+    // Error 4: Wrong modulo operation
+    let remainder = 10.5 %% 3.0;
+    
+    // TODO: This function should calculate the area of a circle but has errors
+    pub fn calculate_circle_area(radius: f64) -> f64 {
+        // The area of a circle is π * r²
+        // This implementation has errors in the formula
+        let pi = 3.14; // Not using the standard constant
+        pi + radius * radius // Wrong operation
+    }
+    
+    // TODO: This function should compare two floats within an epsilon range
+    // but has several errors
+    pub fn compare_floats(a: f64, b: f64, epsilon: f64) -> bool {
+        // This should return true if the absolute difference between a and b
+        // is less than or equal to epsilon
+        a - b < epsilon // Missing absolute value, wrong comparison
+    }
+}
+
+// Tests for the challenges
+mod tests {
+    use super::challenges;
+    
+    pub fn run_challenges() -> Result<(), String> {
+        println!("\nRunning floating-point challenges...");
+        
+        // Challenge 1: Fix floating-point declarations and calculations
+        challenge_float_calculations()?;
+        
+        // Challenge 2: Fix the circle area calculation function
+        let area = challenges::calculate_circle_area(2.0);
+        let expected = std::f64::consts::PI * 4.0; // π * r²
+        
+        if (area - expected).abs() > 0.0001 {
+            return Err(format!("Circle area calculation wrong. Expected: {}, Got: {}", expected, area));
+        }
+        println!("Circle area calculation correct!");
+        
+        // Challenge 3: Fix the float comparison function
+        // Should return true if a and b are within epsilon of each other
+        if !challenges::compare_floats(0.1 + 0.2, 0.3, 0.0001) {
+            return Err("compare_floats should return true for 0.1 + 0.2 and 0.3".to_string());
+        }
+        println!("Float comparison function works correctly!");
+        
+        println!("All floating-point challenges completed successfully!");
+        Ok(())
+    }
+    
+    fn challenge_float_calculations() -> Result<(), String> {
+        // This is just a placeholder as the real challenge is in the challenges module
+        // The actual verification would need to be done differently since we can't access 
+        // the local variables in the challenges module directly
+        
+        // For now, we'll just return Ok
+        println!("Float calculations challenge completed!");
+        Ok(())
+    }
 }

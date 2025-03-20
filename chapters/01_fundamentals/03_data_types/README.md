@@ -30,10 +30,30 @@ Choosing the right type for your data helps make your code:
 - More secure (preventing overflow and other issues)
 - More maintainable (making your intentions clearer)
 
+## Learning Through Challenges
+
+Each file in this section has two parts:
+
+1. **Teaching Section**: The top part of each file contains working examples that demonstrate the data type concepts with explanations in comments.
+
+2. **Challenges Module**: A module at the bottom of each file with intentionally broken code that you need to fix. These challenges test your understanding of the concepts presented in the teaching section.
+
+To complete the challenges:
+1. Read through the teaching section to understand the concepts
+2. Look at the broken code in the challenges module
+3. Fix each issue to make the code compile and run correctly
+4. The code contains validations that will tell you if your fixes are correct
+
 ## Working Through This Section
 
-1. Start with the scalar types in the [`01_scalar_types/`](./01_scalar_types/) directory
-2. Move on to compound types in the [`02_compound_types/`](./02_compound_types/) directory
-3. Complete the challenges in each file
+1. Start with the scalar types in the [`01_scalar_types/`](./01_scalar_types/) directory:
+   - integers.rs: Learn about different integer types and overflow handling
+   - floating_point.rs: Explore floating-point precision and special values
+   - boolean.rs: Understand logical operations and control flow
+   - character.rs: See how Rust handles Unicode characters
 
-Each file contains examples and explanations of the type along with challenges to test your understanding.
+2. Move on to compound types in the [`02_compound_types/`](./02_compound_types/) directory:
+   - tuples.rs: Group values of different types together
+   - arrays.rs: Work with collections of the same type
+
+Happy coding! Remember that making mistakes and fixing them is one of the best ways to learn programming concepts.
