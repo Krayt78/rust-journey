@@ -3,10 +3,16 @@
 // A slice is a reference to a contiguous sequence of elements in a collection.
 // Slices don't own data—they borrow it. They're useful when you want to
 // reference only a portion of a collection.
+//
+// For more information, see The Rust Book:
+// https://doc.rust-lang.org/book/ch04-03-slices.html
 
 fn main() {
     println!("Exploring Slices in Rust!");
     
+    //------------------------------------------------------
+    // BASIC SLICE CREATION
+    //------------------------------------------------------
     // Creating a slice from an array
     let array = [1, 2, 3, 4, 5];
     let slice = &array[1..4]; // This is a slice of the 2nd, 3rd, and 4th elements
@@ -17,59 +23,88 @@ fn main() {
     // Slices have a length
     println!("\nSlice length: {}", slice.len());
     
+    //------------------------------------------------------
+    // ACCESSING SLICE ELEMENTS
+    //------------------------------------------------------
     // Accessing elements in a slice
     println!("\nAccessing slice elements:");
     println!("First element: {}", slice[0]); // This is the 2nd element of the original array
     println!("Last element: {}", slice[slice.len() - 1]);
     
+    //------------------------------------------------------
+    // SLICE RANGES
+    //------------------------------------------------------
     // Creating a slice of the entire array
     let full_slice = &array[..]; // Equivalent to &array[0..array.len()]
     println!("\nFull slice: {:?}", full_slice);
     
     // Slices with omitted bounds
     let from_start = &array[..3]; // Equivalent to &array[0..3]
-    let to_end = &array[2..];     // Equivalent to &array[2..array.len()]
+    let to_end = &array[2..]; // Equivalent to &array[2..array.len()]
     
-    println!("\nSlice from start (..3): {:?}", from_start);
-    println!("Slice to end (2..): {:?}", to_end);
+    println!("Slice from start to index 3: {:?}", from_start);
+    println!("Slice from index 2 to end: {:?}", to_end);
     
-    // Iterating over slices
-    println!("\nIterating over slice elements:");
-    for &item in slice.iter() {
-        println!("Value: {}", item);
-    }
+    //------------------------------------------------------
+    // INCLUSIVE RANGES
+    //------------------------------------------------------
+    // Using inclusive ranges
+    let inclusive = &array[1..=3]; // Includes indices 1, 2, and 3
+    println!("\nInclusive slice (1..=3): {:?}", inclusive);
     
+    //------------------------------------------------------
+    // STRING SLICES
+    //------------------------------------------------------
     // String slices
-    let message = "Hello, world!";
-    let hello = &message[0..5];
-    let world = &message[7..12];
+    let message = "Hello, Rust!";
+    let greeting = &message[0..5]; // "Hello"
+    let language = &message[7..11]; // "Rust"
     
-    println!("\nString: {}", message);
-    println!("Slice 'hello': {}", hello);
-    println!("Slice 'world': {}", world);
+    println!("\nString slices:");
+    println!("Original message: {}", message);
+    println!("Greeting: {}", greeting);
+    println!("Language: {}", language);
     
+    //------------------------------------------------------
+    // MUTABLE SLICES
+    //------------------------------------------------------
     // Mutable slices
     let mut numbers = [1, 2, 3, 4, 5];
-    println!("\nOriginal mutable array: {:?}", numbers);
+    let slice_mut = &mut numbers[1..4];
     
-    // Creating a mutable slice
-    let mutable_slice = &mut numbers[1..4];
-    println!("Mutable slice before: {:?}", mutable_slice);
+    println!("\nBefore modification:");
+    println!("Mutable slice: {:?}", slice_mut);
     
-    // Modifying elements through the slice
-    mutable_slice[0] = 20; // This changes the 2nd element of the original array
-    mutable_slice[1] = 30; // This changes the 3rd element of the original array
+    // Modifying the slice (which modifies the original array)
+    slice_mut[0] = 20; // This changes the 2nd element of the original array
+    slice_mut[1] = 30; // This changes the 3rd element of the original array
     
-    println!("Mutable slice after: {:?}", mutable_slice);
-    println!("Modified array: {:?}", numbers);
+    println!("After modification:");
+    println!("Mutable slice: {:?}", slice_mut);
+    println!("Original array: {:?}", numbers);
     
-    // Slice type annotation
-    let typed_slice: &[i32] = &array[1..4];
-    println!("\nTyped slice: {:?}", typed_slice);
+    //------------------------------------------------------
+    // SLICE METHODS
+    //------------------------------------------------------
+    // Using slice methods
+    let numbers = [10, 20, 30, 40, 50];
+    let slice = &numbers[..];
     
-    // Function that takes a slice
-    let sum = sum_slice(&array[1..4]);
-    println!("\nSum of slice elements: {}", sum);
+    println!("\nSlice methods:");
+    println!("First element: {:?}", slice.first());
+    println!("Last element: {:?}", slice.last());
+    println!("Is empty: {}", slice.is_empty());
+    
+    // Getting a subslice
+    let sub = &slice[1..3];
+    println!("Subslice: {:?}", sub);
+    
+    //------------------------------------------------------
+    // SLICES AS FUNCTION PARAMETERS
+    //------------------------------------------------------
+    // Passing slices to functions
+    let sum = sum_slice(&numbers[1..4]);
+    println!("\nSum of slice [20, 30, 40]: {}", sum);
     
     println!("\n==== CHALLENGES ====");
     println!("Fix the code in the challenges module to make it compile and run correctly!");
@@ -83,79 +118,62 @@ fn main() {
 // Function that takes a slice as a parameter
 fn sum_slice(slice: &[i32]) -> i32 {
     let mut sum = 0;
-    for &item in slice {
-        sum += item;
+    for &n in slice {
+        sum += n;
     }
     sum
 }
 
+//------------------------------------------------------
 // CHALLENGES: TODO: Fix the broken code in this module
+//------------------------------------------------------
 mod challenges {
     // TODO: These slice operations have errors
-    
-    // Error 1: Incorrect slice syntax
-    let array = [10, 20, 30, 40, 50];
-    let slice1 = array[1, 3];
-    
-    // Error 2: Out of bounds slice
-    let slice2 = &array[3..6];
-    
-    // Error 3: Mutable/immutable borrow confusion
-    let mut array2 = [1, 2, 3];
-    let slice3 = &array2[0..2];
-    array2[0] = 10; // Error: cannot borrow as mutable because it's also borrowed as immutable
-    println!("Slice: {:?}", slice3);
-    
-    // Error 4: Incorrect type handling
-    let string = "hello";
-    let char_slice: &[char] = &string[0..3];
-    
-    // TODO: This function should sum all values in a slice
-    pub fn sum_slice(slice: &[i32]) -> i32 {
-        // This implementation has errors in how it sums the values
-        let sum = 0;
+    pub fn challenge_slice_basics() -> Result<(), String> {
+        // Error 1: Incorrect slice creation
+        let array = [10, 20, 30, 40, 50];
+        let slice = array[1..3]; // Missing the reference operator
         
-        // Incorrect loop handling
-        for i in 0..slice.len() {
-            sum += slice[i]; // Missing mutability
-        }
+        // Error 2: Out of bounds slice
+        let out_of_bounds = &array[3..10];
         
-        sum
+        // Error 3: Modifying a non-mutable slice
+        let s = &array[1..4];
+        s[0] = 100;
+        
+        // Don't modify below this line
+        Ok(())
     }
     
-    // TODO: Find the starting position of a subslice within a slice, if it exists
-    pub fn find_subslice(haystack: &[i32], needle: &[i32]) -> Option<usize> {
-        // This implementation has logic errors
-        if needle.len() > haystack.len() {
-            return None;
-        }
-        
-        for i in 0..=haystack.len() {  // Incorrect upper bound
-            let mut found = true;
-            
-            for j in 0..needle.len() {
-                if i + j > haystack.len() || haystack[i + j] != needle[j] {
-                    found = false;
-                    break;
-                }
-            }
-            
-            if found {
-                return Some(i);
+    // TODO: This function should return a slice containing only positive numbers
+    pub fn positive_numbers(numbers: &[i32]) -> &[i32] {
+        // This implementation incorrectly tries to create a new slice
+        let mut result = [];
+        for &n in numbers {
+            if n > 0 {
+                result.push(n); // Can't modify the length of an array
             }
         }
-        
-        None
+        &result
     }
     
-    // TODO: Return the middle slice of an array (excluding first and last elements)
-    pub fn get_middle_slice(arr: &[i32]) -> &[i32] {
-        // This implementation has errors in how it gets the middle slice
-        &arr[0..arr.len()]  // Wrong indices
+    // TODO: This function should find a substring within a string
+    pub fn find_substring<'a>(text: &'a str, start_idx: usize, length: usize) -> &'a str {
+        // This has an error in how the slice is created
+        let end_idx = start_idx + length;
+        &text[start_idx..=end_idx] // Using inclusive range, which might be out of bounds
+    }
+    
+    // TODO: This function should safely access an element in a slice
+    pub fn get_element(slice: &[i32], index: usize) -> i32 {
+        // This implementation doesn't handle out-of-bounds safely
+        slice[index] // This will panic if index is out of bounds
     }
 }
 
+//------------------------------------------------------
 // Tests for the challenges
+//------------------------------------------------------
 mod tests {
     use super::challenges;
     
@@ -163,49 +181,59 @@ mod tests {
     pub fn run_challenges() -> Result<(), String> {
         println!("\nRunning slice challenges...");
         
-        // Challenge 1: Fix slice creation and access
-        challenge_slice_basics()?;
-        
-        // Challenge 2: Fix the sum function
-        let test_slice = &[1, 2, 3, 4, 5][..];
-        let sum_result = challenges::sum_slice(test_slice);
-        
-        if sum_result != 15 {
-            return Err(format!("sum_slice returned wrong value. Expected: 15, Got: {}", sum_result));
+        // Challenge 1: Fix slice basics
+        if let Err(e) = challenges::challenge_slice_basics() {
+            return Err(format!("Slice basics challenge failed: {}", e));
         }
-        println!("sum_slice function works correctly!");
+        println!("Successfully fixed slice basics!");
         
-        // Challenge 3: Fix the find subslice function
-        let haystack = [1, 2, 3, 4, 5];
-        let needle = [3, 4];
+        // Challenge 2: Fix positive_numbers function
+        let numbers = [-3, -1, 0, 1, 2, 5];
+        let positives = challenges::positive_numbers(&numbers);
+        let expected = &numbers[3..6]; // [1, 2, 5]
         
-        let found_at = challenges::find_subslice(&haystack, &needle);
-        if found_at != Some(2) {
-            return Err(format!("find_subslice returned wrong value. Expected: Some(2), Got: {:?}", found_at));
+        if positives != expected {
+            return Err(format!(
+                "positive_numbers({:?}) should return {:?}, got {:?}",
+                numbers, expected, positives
+            ));
         }
-        println!("find_subslice function works correctly!");
+        println!("Successfully fixed positive_numbers function!");
         
-        // Challenge 4: Fix the middle slice function
-        let array = [1, 2, 3, 4, 5];
-        let middle = challenges::get_middle_slice(&array);
-        
-        if middle != [2, 3, 4] {
-            return Err(format!("get_middle_slice returned wrong slice. Expected: [2, 3, 4], Got: {:?}", middle));
+        // Challenge 3: Fix find_substring function
+        let text = "Hello, Rust programmer!";
+        let rust = challenges::find_substring(text, 7, 4);
+        if rust != "Rust" {
+            return Err(format!(
+                "find_substring({:?}, 7, 4) should return \"Rust\", got {:?}",
+                text, rust
+            ));
         }
-        println!("get_middle_slice function works correctly!");
+        println!("Successfully fixed find_substring function!");
+        
+        // Challenge 4: Fix get_element function
+        let numbers = [10, 20, 30, 40, 50];
+        
+        // Test valid index
+        let element = challenges::get_element(&numbers, 2);
+        if element != 30 {
+            return Err(format!(
+                "get_element({:?}, 2) should return 30, got {}",
+                numbers, element
+            ));
+        }
+        
+        // Test out-of-bounds index (should return a default value, not panic)
+        let out_of_bounds = challenges::get_element(&numbers, 10);
+        if out_of_bounds != 0 {
+            return Err(format!(
+                "get_element({:?}, 10) should return 0 for out-of-bounds, got {}",
+                numbers, out_of_bounds
+            ));
+        }
+        println!("Successfully fixed get_element function!");
         
         println!("All slice challenges completed successfully!");
-        Ok(())
-    }
-    
-    #[test]
-    fn challenge_slice_basics() -> Result<(), String> {
-        // This is just a placeholder as the real challenge is in the challenges module
-        // The actual verification would need to be done differently since we can't access 
-        // the local variables in the challenges module directly
-        
-        // For now, we'll just return Ok
-        println!("Slice basics challenge completed!");
         Ok(())
     }
 } 

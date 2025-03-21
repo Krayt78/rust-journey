@@ -1,31 +1,51 @@
 // This is a comment in Rust
 
+//------------------------------------------------------
 // Hello World in Rust
+//------------------------------------------------------
 //
 // This program demonstrates the basic structure of a Rust program
 // and how to output text to the console.
+//
+// For more information, see The Rust Book:
+// https://doc.rust-lang.org/book/ch01-02-hello-world.html
 
 
 // The main function is the entry point of every Rust program
 // When you run a Rust program, execution begins in the main function
 fn main() {
+    //------------------------------------------------------
+    // BASIC PRINTING
+    //------------------------------------------------------
     // println! is a macro (not a function) that prints text to the console
     // Macros are denoted with an exclamation mark (!)
     // We'll learn more about macros later
     println!("Hello, World!");
     
+    //------------------------------------------------------
+    // PRINTING WITH VARIABLES
+    //------------------------------------------------------
     // You can include variables and expressions in println! using curly braces {}
     let name = "Rustacean";
     println!("Hello, {}!", name);
     
+    //------------------------------------------------------
+    // MULTIPLE VALUES
+    //------------------------------------------------------
     // You can also include multiple values
     let language = "Rust";
     let year = 2025;
     println!("I'm learning {} in {}!", language, year);
     
+    //------------------------------------------------------
+    // POSITIONAL PARAMETERS
+    //------------------------------------------------------
     // You can specify which value goes where using numbers
     println!("In {1}, I'm learning {0}!", language, year);
     
+    //------------------------------------------------------
+    // NAMED PARAMETERS
+    //------------------------------------------------------
     // Named parameters work too
     println!("I'm learning {language} in {year}!");
     
@@ -38,7 +58,9 @@ fn main() {
     }
 }
 
+//------------------------------------------------------
 // CHALLENGES: TODO: Fix the broken code in this module
+//------------------------------------------------------
 mod challenges {
     // TODO: Fix the println! macro invocation
     pub fn broken_print() -> Result<(), String> {
@@ -68,7 +90,9 @@ mod challenges {
     }
 }
 
+//------------------------------------------------------
 // Tests for the challenges
+//------------------------------------------------------
 mod tests {
     use super::challenges;
     use std::io::{self, Write};

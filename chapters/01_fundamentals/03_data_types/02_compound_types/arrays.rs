@@ -3,10 +3,16 @@
 // An array is a collection of elements of the same type.
 // Arrays in Rust have a fixed length and all elements must be of the same type.
 // They are stored on the stack, not the heap.
+//
+// For more information, see The Rust Book:
+// https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type
 
 fn main() {
     println!("Exploring Arrays in Rust!");
     
+    //------------------------------------------------------
+    // BASIC ARRAY DECLARATIONS
+    //------------------------------------------------------
     // Basic array declaration
     let numbers = [1, 2, 3, 4, 5];
     println!("Basic array: {:?}", numbers);
@@ -20,6 +26,9 @@ fn main() {
     let repeated = [3; 5]; // equivalent to [3, 3, 3, 3, 3]
     println!("Array with repeated values: {:?}", repeated);
     
+    //------------------------------------------------------
+    // ACCESSING ARRAY ELEMENTS
+    //------------------------------------------------------
     // Accessing array elements (using index notation)
     let first = numbers[0];
     let second = numbers[1];
@@ -28,66 +37,80 @@ fn main() {
     println!("First element: {}", first);
     println!("Second element: {}", second);
     
-    // Getting the length of an array
-    println!("\nArray length: {}", numbers.len());
+    //------------------------------------------------------
+    // ARRAY PROPERTIES
+    //------------------------------------------------------
+    // Getting array length
+    let length = numbers.len();
+    println!("\nArray length: {}", length);
     
-    // Arrays are stored on the stack
-    println!("Size of [i32; 5] array: {} bytes", std::mem::size_of::<[i32; 5]>());
+    // Getting size of array in bytes
+    let size = std::mem::size_of_val(&numbers);
+    println!("Array size in bytes: {} (5 elements * 4 bytes each for i32)", size);
     
-    // Slicing arrays
-    let slice = &numbers[1..4]; // This creates a slice from index 1 to 3 (not including 4)
-    println!("\nSlice from index 1 to 3: {:?}", slice);
+    //------------------------------------------------------
+    // ARRAY ITERATION
+    //------------------------------------------------------
+    // Iterating over array elements
+    println!("\nIterating over array:");
     
-    // Iterating over arrays
-    println!("\nIterating over array elements:");
-    for num in numbers.iter() {
-        println!("Value: {}", num);
+    // Using a for loop
+    for element in numbers.iter() {
+        println!("Element: {}", element);
     }
     
-    // Iterating with index
+    // Using a for loop with index
     println!("\nIterating with index:");
-    for (i, &num) in numbers.iter().enumerate() {
-        println!("Index: {}, Value: {}", i, num);
+    for (i, &element) in numbers.iter().enumerate() {
+        println!("Element at index {}: {}", i, element);
     }
     
-    // Mutating arrays
-    let mut mutable_array = [1, 2, 3, 4, 5];
-    println!("\nOriginal mutable array: {:?}", mutable_array);
+    //------------------------------------------------------
+    // ARRAY SLICES
+    //------------------------------------------------------
+    // Creating a slice (a reference to a portion of an array)
+    let slice = &numbers[1..4]; // Elements at indices 1, 2, and 3
+    println!("\nSlice of the array: {:?}", slice);
     
-    mutable_array[2] = 10;
-    println!("Modified mutable array: {:?}", mutable_array);
+    // Slice with inclusive range
+    let inclusive_slice = &numbers[1..=3]; // Elements at indices 1, 2, and 3
+    println!("Slice with inclusive range: {:?}", inclusive_slice);
     
-    // Arrays of different types
-    let integers: [i32; 5] = [1, 2, 3, 4, 5];
-    let floats: [f64; 3] = [1.1, 2.2, 3.3];
-    let booleans: [bool; 2] = [true, false];
-    let characters: [char; 4] = ['a', 'b', 'c', 'd'];
+    //------------------------------------------------------
+    // ARRAY METHODS
+    //------------------------------------------------------
+    // Using array methods
+    let sum: i32 = numbers.iter().sum();
+    println!("\nSum of all elements: {}", sum);
     
-    println!("\nArrays of different types:");
-    println!("Integers: {:?}", integers);
-    println!("Floats: {:?}", floats);
-    println!("Booleans: {:?}", booleans);
-    println!("Characters: {:?}", characters);
+    // Finding the maximum value
+    if let Some(&max) = numbers.iter().max() {
+        println!("Maximum value: {}", max);
+    }
     
+    // Finding the minimum value
+    if let Some(&min) = numbers.iter().min() {
+        println!("Minimum value: {}", min);
+    }
+    
+    //------------------------------------------------------
+    // MULTI-DIMENSIONAL ARRAYS
+    //------------------------------------------------------
     // Multi-dimensional arrays
-    let matrix: [[i32; 3]; 2] = [
-        [1, 2, 3],    // Row 1
-        [4, 5, 6],    // Row 2
+    let matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
     ];
     
-    println!("\nMulti-dimensional array:");
-    println!("Matrix: {:?}", matrix);
-    println!("Element at row 1, column 2: {}", matrix[0][1]);
+    println!("\nMatrix (multi-dimensional array):");
+    for row in &matrix {
+        println!("{:?}", row);
+    }
     
-    // Passing arrays to functions
-    let sum = sum_array(&numbers);
-    println!("\nSum of array elements: {}", sum);
-    
-    // Sorting an array
-    let mut unsorted = [5, 2, 8, 1, 9];
-    println!("\nUnsorted array: {:?}", unsorted);
-    unsorted.sort();
-    println!("Sorted array: {:?}", unsorted);
+    // Accessing elements in a multi-dimensional array
+    let element = matrix[1][2]; // Row 1, Column 2
+    println!("Element at matrix[1][2]: {}", element);
     
     println!("\n==== CHALLENGES ====");
     println!("Fix the code in the challenges module to make it compile and run correctly!");
@@ -98,74 +121,62 @@ fn main() {
     }
 }
 
-// Function that takes an array reference as a parameter
-fn sum_array(arr: &[i32; 5]) -> i32 {
-    let mut sum = 0;
-    for &num in arr {
-        sum += num;
-    }
-    sum
-}
-
-// CHALLENGES: Fix the broken code in this module
+//------------------------------------------------------
+// CHALLENGES: TODO: Fix the broken code in this module
+//------------------------------------------------------
 mod challenges {
     // TODO: These array declarations and operations have errors
-    
-    // Error 1: Wrong type in array
-    let mixed_types = [1, 2, "three", 4, 5];
-    
-    // Error 2: Wrong size in type annotation
-    let wrong_size: [i32; 3] = [1, 2, 3, 4, 5];
-    
-    // Error 3: Out of bounds access
-    let small_array = [1, 2, 3];
-    let out_of_bounds = small_array[3];
-    
-    // Error 4: Incorrect array initialization
-    let repeated = [3, 5]; // Should be an array of five 3s
-    
-    // TODO: This function should calculate the average of an array of integers
-    pub fn calculate_average(arr: &[i32; 5]) -> f64 {
-        // This implementation has errors in how it calculates the average
-        let mut sum = 0;
-        for num in arr {
-            sum += num; // Missing dereferencing
+    pub fn challenge_array_basics() -> Result<(), String> {
+        // Error 1: Array size mismatch in declaration
+        let numbers: [i32; 4] = [1, 2, 3, 4, 5];
+        
+        // Error 2: Invalid index access
+        let last = numbers[5];
+        
+        // Error 3: Attempting to change array length
+        numbers.push(6);
+        
+        // Don't modify this verification
+        if numbers.len() != 5 || last != 5 {
+            return Err("Array challenges not fixed correctly".to_string());
         }
         
-        // Wrong division (missing type conversion)
+        Ok(())
+    }
+    
+    // TODO: This function should return an array with n elements, all initialized to value
+    pub fn create_array(value: i32, n: usize) -> [i32; 5] {
+        // Problem: This function should work for any size n, but the return type 
+        // is fixed to size 5, which is incorrect
+        let array = [value; n];
+        array
+    }
+    
+    // TODO: This function should find the average of an array
+    pub fn find_average(arr: &[i32]) -> f64 {
+        // This implementation has errors
+        let sum = 0;
+        for i in 0..arr.len() {
+            sum += arr[i];
+        }
+        
         sum / arr.len()
     }
     
-    // TODO: This function should find the maximum value in an array
-    pub fn find_max(arr: &[i32; 5]) -> i32 {
-        // This implementation has logic errors
-        let mut max = arr[0];
-        
-        // Wrong loop implementation
+    // TODO: This function should reverse an array
+    pub fn reverse_array(arr: [i32; 5]) -> [i32; 5] {
+        // This implementation doesn't correctly reverse the array
+        let mut result = [0; 5];
         for i in 0..arr.len() {
-            // Missing comparison
+            result[i] = arr[i];
         }
-        
-        max
-    }
-    
-    // TODO: This function should transpose a 2x3 matrix (convert rows to columns)
-    pub fn transpose_matrix(matrix: [[i32; 3]; 2]) -> [[i32; 2]; 3] {
-        // This implementation has logic errors
-        let mut result = [[0; 2]; 3];
-        
-        // The loop logic here is incorrect
-        for i in 0..2 {
-            for j in 0..3 {
-                result[i][j] = matrix[i][j]; // Wrong indices
-            }
-        }
-        
         result
     }
 }
 
+//------------------------------------------------------
 // Tests for the challenges
+//------------------------------------------------------
 mod tests {
     use super::challenges;
     
@@ -173,52 +184,59 @@ mod tests {
     pub fn run_challenges() -> Result<(), String> {
         println!("\nRunning array challenges...");
         
-        // Challenge 1: Fix array declarations and access
-        challenge_array_basics()?;
+        // Challenge 1: Fix array basics
+        if let Err(e) = challenges::challenge_array_basics() {
+            return Err(format!("Array basics challenge failed: {}", e));
+        }
+        println!("Successfully fixed array basics!");
         
-        // Challenge 2: Fix the array averaging function
+        // Challenge 2: Fix create_array function
+        let test_size = 3;
+        let test_value = 7;
+        let result = challenges::create_array(test_value, test_size);
+        
+        if result.len() != test_size {
+            return Err(format!(
+                "create_array({}, {}) should return an array of length {}, got length {}",
+                test_value, test_size, test_size, result.len()
+            ));
+        }
+        
+        for &val in &result {
+            if val != test_value {
+                return Err(format!(
+                    "create_array({}, {}) should fill array with {}, got {}",
+                    test_value, test_size, test_value, val
+                ));
+            }
+        }
+        println!("Successfully fixed create_array function!");
+        
+        // Challenge 3: Fix find_average function
         let test_array = [10, 20, 30, 40, 50];
-        let avg = challenges::calculate_average(&test_array);
-        
-        if (avg - 30.0).abs() > 0.0001 {
-            return Err(format!("calculate_average returned wrong value. Expected: 30.0, Got: {}", avg));
+        let avg = challenges::find_average(&test_array);
+        if (avg - 30.0).abs() > 0.001 {
+            return Err(format!(
+                "find_average([10, 20, 30, 40, 50]) should return 30.0, got {}",
+                avg
+            ));
         }
-        println!("Array averaging function works correctly!");
+        println!("Successfully fixed find_average function!");
         
-        // Challenge 3: Fix the find max function
-        let max = challenges::find_max(&[3, 1, 5, 2, 4]);
-        if max != 5 {
-            return Err(format!("find_max returned wrong value. Expected: 5, Got: {}", max));
+        // Challenge 4: Fix reverse_array function
+        let test_array = [1, 2, 3, 4, 5];
+        let reversed = challenges::reverse_array(test_array);
+        let expected = [5, 4, 3, 2, 1];
+        
+        if reversed != expected {
+            return Err(format!(
+                "reverse_array({:?}) should return {:?}, got {:?}",
+                test_array, expected, reversed
+            ));
         }
-        println!("find_max function works correctly!");
-        
-        // Challenge 4: Fix the matrix transpose function
-        let matrix = [
-            [1, 2, 3],
-            [4, 5, 6]
-        ];
-        
-        let transposed = challenges::transpose_matrix(matrix);
-        
-        // Check first element of transposed matrix
-        if transposed[0][0] != 1 || transposed[0][1] != 4 {
-            return Err("transpose_matrix failed - first row is incorrect".to_string());
-        }
-        
-        println!("Matrix transpose function works correctly!");
+        println!("Successfully fixed reverse_array function!");
         
         println!("All array challenges completed successfully!");
-        Ok(())
-    }
-    
-    #[test]
-    fn challenge_array_basics() -> Result<(), String> {
-        // This is just a placeholder as the real challenge is in the challenges module
-        // The actual verification would need to be done differently since we can't access 
-        // the local variables in the challenges module directly
-        
-        // For now, we'll just return Ok
-        println!("Array basics challenge completed!");
         Ok(())
     }
 } 

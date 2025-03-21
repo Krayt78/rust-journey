@@ -4,11 +4,16 @@
 // - Immutable and mutable variables
 // - Shadowing
 // - Constants
+//
+// For more information, see The Rust Book:
+// https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html
 
 fn main() {
     println!("Exploring Variables in Rust!");
     
+    //------------------------------------------------------
     // IMMUTABLE VARIABLES
+    //------------------------------------------------------
     // By default, variables in Rust are immutable
     let language = "Rust";
     println!("I'm learning {}", language);
@@ -16,7 +21,9 @@ fn main() {
     // This would cause a compile error:
     // language = "Rust Programming";
     
+    //------------------------------------------------------
     // MUTABLE VARIABLES
+    //------------------------------------------------------
     // Use the 'mut' keyword to make a variable mutable
     let mut version = "1.0";
     println!("Starting with version: {}", version);
@@ -25,7 +32,9 @@ fn main() {
     version = "1.72";
     println!("Updated to version: {}", version);
     
+    //------------------------------------------------------
     // SHADOWING
+    //------------------------------------------------------
     // We can shadow a variable by using the same name
     let count = 5;
     println!("Original count: {}", count);
@@ -41,7 +50,9 @@ fn main() {
     let value = value.parse::<i32>().unwrap();
     println!("Value as integer: {}", value);
     
+    //------------------------------------------------------
     // CONSTANTS
+    //------------------------------------------------------
     // Constants are always immutable and must have type annotations
     const MAX_USERS: u32 = 100_000;
     println!("Maximum users allowed: {}", MAX_USERS);
@@ -50,7 +61,9 @@ fn main() {
     const PI: f64 = 3.141_592_653_589_793;
     println!("Pi: {}", PI);
     
+    //------------------------------------------------------
     // VARIABLE SCOPE
+    //------------------------------------------------------
     // Variables have a scope, which is the block they're declared in
     {
         // This variable only exists in this block
@@ -69,7 +82,9 @@ fn main() {
     }
 }
 
+//------------------------------------------------------
 // CHALLENGES: TODO: Fix the broken code in this module
+//------------------------------------------------------
 mod challenges {
     // TODO: Fix the mutable variable
     pub fn challenge_mutability() -> Result<(), String> {
@@ -148,7 +163,9 @@ mod challenges {
     }
 }
 
+//------------------------------------------------------
 // Tests for the challenges
+//------------------------------------------------------
 mod tests {
     use super::challenges;
     
