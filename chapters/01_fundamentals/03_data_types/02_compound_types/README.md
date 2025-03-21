@@ -1,6 +1,6 @@
 # Compound Types in Rust
 
-Compound types in Rust can group multiple values into one type. The two most basic compound types in Rust are:
+Compound types in Rust can group multiple values into one type. The primary compound types in Rust are:
 
 ## Tuples
 
@@ -13,7 +13,7 @@ Key features of tuples:
 - Can be destructured with pattern matching
 - Useful for returning multiple values from functions
 
-See the [tuples.rs](./tuples.rs) file for examples and exercises.
+See the [0_tuples.rs](./0_tuples.rs) file for examples and exercises.
 
 ## Arrays
 
@@ -26,7 +26,21 @@ Key features of arrays:
 - Stored on the stack (not the heap)
 - The type signature is `[T; N]` where `T` is the type of each element and `N` is the fixed length
 
-See the [arrays.rs](./arrays.rs) file for examples and exercises.
+See the [1_arrays.rs](./1_arrays.rs) file for examples and exercises.
+
+## Slices
+
+Slices are references to a contiguous sequence of elements in a collection. They don't own data—they borrow it.
+
+Key features of slices:
+- Reference a portion of another data structure (like arrays or strings)
+- Don't have ownership of the data they reference
+- Have a length that can be determined at runtime
+- Type signature is `&[T]` for immutable slices and `&mut [T]` for mutable slices
+- String slices are a special type of slice that reference parts of a string (`&str`)
+- Useful for functions that need to operate on portions of collections without taking ownership
+
+See the [2_slices.rs](./2_slices.rs) file for examples and exercises.
 
 ## Difference from Scalar Types
 
@@ -38,8 +52,11 @@ Unlike scalar types (integers, floats, booleans, and characters) which hold only
 
 - **Arrays**: Use when you want a collection of elements of the same type with a fixed length that's known at compile time. Arrays are great for performance-critical code because they're stored on the stack.
 
+- **Slices**: Use when you need to operate on a portion of a collection without taking ownership. They're particularly useful for functions that need to accept different sized collections, as they provide a uniform interface.
+
 ## Working Through This Section
 
-1. Start with [tuples.rs](./tuples.rs) to learn about grouping values of different types
-2. Move on to [arrays.rs](./arrays.rs) to learn about fixed-length collections of the same type
-3. Complete the challenges in each file to test your understanding 
+1. Start with [0_tuples.rs](./0_tuples.rs) to learn about grouping values of different types
+2. Move on to [1_arrays.rs](./1_arrays.rs) to learn about fixed-length collections of the same type
+3. Continue with [2_slices.rs](./2_slices.rs) to understand how to work with portions of collections
+4. Complete the challenges in each file to test your understanding 
