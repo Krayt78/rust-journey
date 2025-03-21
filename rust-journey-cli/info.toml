@@ -1,6 +1,6 @@
 [[exercises]]
 name = "01_hello_world/hello.rs"
-path = "chapters/01_fundamentals/01_hello_world/hello.rs"
+path = "chapters/01_fundamentals/01_hello_world/0_hello.rs"
 mode = "compile"
 hint = """
 The main function needs to be completed. Replace the TODO comment
@@ -8,8 +8,8 @@ with code that prints "Hello, World!" to the console.
 """
 
 [[exercises]]
-name = "02_variables/challenge.rs"
-path = "chapters/01_fundamentals/02_variables/challenge.rs"
+name = "02_variables/variables.rs"
+path = "chapters/01_fundamentals/02_variables/0_variables.rs"
 mode = "compile"
 hint = """
 1. For the first error, remember that variables in Rust are immutable by default.
@@ -20,7 +20,7 @@ hint = """
 
 [[exercises]]
 name = "03_data_types/01_scalar_types/integers.rs"
-path = "chapters/01_fundamentals/03_data_types/01_scalar_types/integers.rs"
+path = "chapters/01_fundamentals/03_data_types/01_scalar_types/0_integers.rs"
 mode = "compile"
 hint = """
 Review the types of integers in Rust and make sure you're using the appropriate
@@ -29,7 +29,7 @@ type for each variable based on its value.
 
 [[exercises]]
 name = "03_data_types/01_scalar_types/floating_point.rs"
-path = "chapters/01_fundamentals/03_data_types/01_scalar_types/floating_point.rs"
+path = "chapters/01_fundamentals/03_data_types/01_scalar_types/1_floating_point.rs"
 mode = "compile"
 hint = """
 Floating point numbers in Rust can be f32 or f64. Make sure you're using
@@ -38,9 +38,94 @@ the appropriate type and handling potential precision issues.
 
 [[exercises]]
 name = "03_data_types/01_scalar_types/boolean.rs"
-path = "chapters/01_fundamentals/03_data_types/01_scalar_types/boolean.rs"
+path = "chapters/01_fundamentals/03_data_types/01_scalar_types/2_boolean.rs"
 mode = "compile"
 hint = """
 Boolean values in Rust are represented by the `bool` type and can be either
 `true` or `false`. Make sure your comparisons and boolean operations are correct.
+"""
+
+[[exercises]]
+name = "03_data_types/01_scalar_types/character.rs"
+path = "chapters/01_fundamentals/03_data_types/01_scalar_types/3_character.rs"
+mode = "compile"
+hint = """
+Character values in Rust are represented by the `char` type using single quotes.
+They are always 4 bytes in size and represent a Unicode Scalar Value.
+"""
+
+[[exercises]]
+name = "03_data_types/02_compound_types/tuples.rs"
+path = "chapters/01_fundamentals/03_data_types/02_compound_types/0_tuples.rs"
+mode = "compile"
+hint = """
+Tuples in Rust group values of different types. They have a fixed length and are
+accessed using dot notation (tuple.0, tuple.1). Remember you can also destructure tuples.
+"""
+
+[[exercises]]
+name = "03_data_types/02_compound_types/arrays.rs"
+path = "chapters/01_fundamentals/03_data_types/02_compound_types/1_arrays.rs"
+mode = "compile"
+hint = """
+Arrays in Rust have a fixed length and all elements must be of the same type.
+They are accessed using square bracket notation (array[0], array[1]).
+"""
+
+[[exercises]]
+name = "03_data_types/02_compound_types/slices.rs"
+path = "chapters/01_fundamentals/03_data_types/02_compound_types/2_slices.rs"
+mode = "compile"
+hint = """
+Slices in Rust are references to a contiguous sequence of elements in a collection.
+They don't own data—they borrow it. They're particularly useful for functions that
+need to accept different sized collections.
+"""
+
+[[exercises]]
+name = "04_functions/basic_functions.rs"
+path = "chapters/01_fundamentals/04_functions/0_basic_functions.rs"
+mode = "compile"
+hint = """
+Functions in Rust are defined using the `fn` keyword followed by a name, 
+parameters in parentheses, and a block containing the function body.
+"""
+
+[[exercises]]
+name = "04_functions/function_parameters.rs"
+path = "chapters/01_fundamentals/04_functions/1_function_parameters.rs"
+mode = "compile"
+hint = """
+Function parameters in Rust require type annotations. Make sure your
+parameter types match what the function expects and how they're used.
+"""
+
+[[exercises]]
+name = "04_functions/return_values.rs"
+path = "chapters/01_fundamentals/04_functions/2_return_values.rs"
+mode = "compile"
+hint = """
+Functions can return values using the `->` syntax followed by the return type.
+The last expression in a function is implicitly returned, or you can use the
+`return` keyword for early returns.
+"""
+
+[[exercises]]
+name = "04_functions/function_expressions.rs"
+path = "chapters/01_fundamentals/04_functions/3_function_expressions.rs"
+mode = "compile"
+hint = """
+In Rust, blocks of code that end without a semicolon are expressions that
+return a value. Use this to create concise function bodies that compute and
+return a value in a single expression.
+"""
+
+[[exercises]]
+name = "04_functions/advanced_functions.rs"
+path = "chapters/01_fundamentals/04_functions/4_advanced_functions.rs"
+mode = "compile"
+hint = """
+Advanced function features in Rust include closures, higher-order functions,
+and diverging functions. Pay attention to function signatures and how
+closures capture their environment.
 """ 
