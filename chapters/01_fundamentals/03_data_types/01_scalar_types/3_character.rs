@@ -94,14 +94,6 @@ fn main() {
     println!("\nCharacter conversion:");
     println!("Character from code {}: '{}'", char_code, char_from_code);
     println!("Code from character '{}': {}", 'Z', 'Z' as u32);
-    
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
-    
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
 }
 
 //------------------------------------------------------

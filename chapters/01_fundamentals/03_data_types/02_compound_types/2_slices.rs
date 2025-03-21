@@ -105,14 +105,6 @@ fn main() {
     // Passing slices to functions
     let sum = sum_slice(&numbers[1..4]);
     println!("\nSum of slice [20, 30, 40]: {}", sum);
-    
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
-    
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
 }
 
 // Function that takes a slice as a parameter

@@ -95,14 +95,6 @@ fn main() {
         x + 5; // Note the semicolon here
     };
     println!("Expression with trailing semicolon returns: {:?}", unit_result);
-    
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
-    
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
 }
 
 //------------------------------------------------------

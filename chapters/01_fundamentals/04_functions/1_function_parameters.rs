@@ -22,13 +22,13 @@ fn main() {
     
     // Note: Rust is strongly typed, so parameters must have type annotations
     
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
+    // Using arguments with default values (emulated with Option)
+    greet_with_optional_title("Ada", None);
+    greet_with_optional_title("Grace", Some("Dr."));
     
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
+    // Multiple parameters of the same type
+    println!("\nRectangle area: {}", calculate_area(5, 10));
+    println!("Rectangle perimeter: {}", calculate_perimeter(5, 10));
 }
 
 // Function with a single parameter

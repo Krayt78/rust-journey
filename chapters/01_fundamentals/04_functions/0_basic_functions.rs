@@ -17,14 +17,6 @@ fn main() {
     
     // Functions can be defined anywhere in the file
     // but they cannot be nested inside other functions
-    
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
-    
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
 }
 
 // Function definition starts with 'fn' keyword followed by the function name

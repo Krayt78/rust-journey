@@ -25,13 +25,14 @@ fn main() {
     let (product, difference) = multiply_and_subtract(10, 4);
     println!("10 * 4 = {}, 10 - 4 = {}", product, difference);
     
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
+    // Early returns with conditionals
+    let num = 42;
+    let result = is_positive_or_zero(num);
+    println!("{} is positive or zero: {}", num, result);
     
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
+    let negative = -10;
+    let result = is_positive_or_zero(negative);
+    println!("{} is positive or zero: {}", negative, result);
 }
 
 // Function that returns a value (i32)

@@ -18,13 +18,12 @@ fn main() {
     let computed = compute_value(10);
     println!("Computed value: {}", computed);
     
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
+    // Expression with conditionals
+    let status_message = get_status_message(200);
+    println!("Status 200: {}", status_message);
     
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
+    let error_message = get_status_message(404);
+    println!("Status 404: {}", error_message);
 }
 
 // Function that returns the sum of two numbers

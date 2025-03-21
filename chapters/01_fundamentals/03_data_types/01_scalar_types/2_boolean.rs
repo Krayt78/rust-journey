@@ -102,13 +102,12 @@ fn main() {
         println!("At least one condition is true");
     }
     
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
+    let result5 = false || is_even(4) || true;
+    println!("false || is_even(4) || true = {}", result5);
     
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
+    // In this case, is_even(5) is not evaluated
+    let result6 = false || true || is_even(5);
+    println!("false || true || is_even(5) = {}", result6);
 }
 
 //------------------------------------------------------

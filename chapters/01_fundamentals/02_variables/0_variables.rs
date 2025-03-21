@@ -72,14 +72,6 @@ fn main() {
     }
     // This would cause a compile error:
     // println!("Outside block: {}", scoped_variable);
-    
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
-    
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
 }
 
 //------------------------------------------------------

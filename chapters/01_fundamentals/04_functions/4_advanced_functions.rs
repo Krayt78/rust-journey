@@ -27,13 +27,14 @@ fn main() {
     println!("check_positive(5): {}", result1);
     println!("check_positive(-5): {}", result2);
     
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
+    // Higher-order functions
+    let numbers = vec![1, 2, 3, 4, 5];
+    let mapped = map(numbers, |n| n * n);
+    println!("Mapped: {:?}", mapped);
     
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
+    // Chaining functions
+    let result = increment(double(5));
+    println!("5 doubled then incremented: {}", result);
 }
 
 // Function demonstrating scope

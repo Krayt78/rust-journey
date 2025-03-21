@@ -100,14 +100,6 @@ fn main() {
     println!("Checked: {:?}", checked);
     println!("Overflowed: {:?}", overflowed);
     println!("Saturated: {}", saturated);
-    
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
-    
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
 }
 
 //------------------------------------------------------

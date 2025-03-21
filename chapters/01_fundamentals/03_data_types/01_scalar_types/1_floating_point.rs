@@ -63,18 +63,12 @@ fn main() {
     //------------------------------------------------------
     // SPECIAL VALUES
     //------------------------------------------------------
-    // Special floating-point values
-    let infinity = f64::INFINITY;
-    let neg_infinity = f64::NEG_INFINITY;
-    let nan = f64::NAN; // Not a Number
-    
+    // Displaying special values
     println!("\nSpecial values:");
-    println!("Infinity: {}", infinity);
-    println!("Negative Infinity: {}", neg_infinity);
-    println!("NaN: {}", nan);
-    
-    // NaN comparisons
-    println!("Is NaN equal to itself? {}", nan == nan);
+    println!("Infinity: {}", std::f64::INFINITY);
+    println!("Negative Infinity: {}", std::f64::NEG_INFINITY);
+    println!("Not a Number (NaN): {}", std::f64::NAN);
+    println!("Is NaN a number? {}", std::f64::NAN.is_nan());
     
     //------------------------------------------------------
     // CONSTANTS AND LIMITS
@@ -85,14 +79,6 @@ fn main() {
     println!("Largest value: {}", f64::MAX);
     println!("Smallest value: {}", f64::MIN);
     println!("Epsilon (smallest difference): {}", f64::EPSILON);
-    
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
-    
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
 }
 
 //------------------------------------------------------

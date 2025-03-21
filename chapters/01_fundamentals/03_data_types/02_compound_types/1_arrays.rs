@@ -112,13 +112,11 @@ fn main() {
     let element = matrix[1][2]; // Row 1, Column 2
     println!("Element at matrix[1][2]: {}", element);
     
-    println!("\n==== CHALLENGES ====");
-    println!("Fix the code in the challenges module to make it compile and run correctly!");
-    
-    // Run the challenges if they compile
-    if let Err(e) = tests::run_challenges() {
-        println!("Challenge error: {}", e);
-    }
+    println!("\nMultidimensional array:");
+    println!("First row: {:?}", matrix[0]);
+    println!("Second element of first row: {}", matrix[0][1]);
+    println!("First element of second row: {}", matrix[1][0]);
+    println!("Second element of third row: {}", matrix[2][1]);
 }
 
 //------------------------------------------------------
