@@ -1,0 +1,19 @@
+[[exercises]]
+name = "01_hello_world/hello.rs"
+path = "examples/01_hello_world/hello.rs"
+mode = "test"
+hint = """
+The main function needs to be completed. Replace the TODO comment
+with code that prints "Hello, World!" to the console.
+"""
+
+[[exercises]]
+name = "02_variables/variables.rs"
+path = "examples/02_variables/variables.rs"
+mode = "test"
+hint = """
+1. For the first error, remember that variables in Rust are immutable by default.
+2. For the second error, you need to use shadowing to change the type.
+3. For the third error, you need to define a constant with the correct syntax.
+4. For the final error, think about variable shadowing again.
+""" 
