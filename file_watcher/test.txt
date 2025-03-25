@@ -1,7 +1,0 @@
-This is a test file
-new lline
-Adding a new line
-This is a test modification
-
-
-test
