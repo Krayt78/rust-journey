@@ -2,6 +2,10 @@
 
 Unit tests verify that individual pieces of your code work correctly in isolation. They are essential for ensuring that functions, methods, and other components behave as expected.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 11.1: How to Write Tests](https://doc.rust-lang.org/book/ch11-01-writing-tests.html) in the official Rust Book.
+
 ## Location of Unit Tests
 
 In Rust, unit tests typically:

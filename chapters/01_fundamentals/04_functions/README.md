@@ -1,6 +1,10 @@
 # Functions in Rust
 
-Functions are essential building blocks in Rust. They allow you to divide your code into reusable, manageable pieces. This section will teach you how to define and use functions effectively in Rust.
+Functions are the primary way we organize code in Rust. They allow us to group code, make it reusable, and give names to blocks of functionality.
+
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 3.3: Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) in the official Rust Book.
 
 ## Key Concepts
 

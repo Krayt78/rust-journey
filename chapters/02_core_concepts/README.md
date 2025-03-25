@@ -2,6 +2,16 @@
 
 This chapter builds on the fundamentals and introduces essential core concepts that make Rust unique and powerful. These concepts form the foundation of Rust's safety and performance guarantees.
 
+## Corresponding Chapters in the Rust Book
+
+This section covers material from several chapters in the official Rust Book:
+- [Chapter 4: Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- [Chapter 5: Using Structs to Structure Related Data](https://doc.rust-lang.org/book/ch05-00-structs.html)
+- [Chapter 6: Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html)
+- [Chapter 7: Managing Growing Projects with Packages, Crates, and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
+- [Chapter 8: Common Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html)
+- [Chapter 9: Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+
 ## Key Topics
 
 - **Ownership**: Rust's approach to memory management without garbage collection

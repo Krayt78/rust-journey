@@ -2,6 +2,10 @@
 
 Structs (short for structures) are custom data types that let you group related values together and name them to make your code more clear.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 5: Using Structs to Structure Related Data](https://doc.rust-lang.org/book/ch05-00-structs.html) in the official Rust Book.
+
 ## Key Concepts
 
 - **Basic Structs**: Creating custom types with named fields

@@ -2,6 +2,10 @@
 
 As your project grows, organizing your tests becomes increasingly important. Well-structured tests make your codebase more maintainable and help ensure comprehensive test coverage.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 11.3: Test Organization](https://doc.rust-lang.org/book/ch11-03-test-organization.html) in the official Rust Book.
+
 ## Principles of Test Organization
 
 When organizing tests in Rust, keep these principles in mind:

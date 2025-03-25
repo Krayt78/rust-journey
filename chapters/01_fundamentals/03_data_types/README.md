@@ -2,6 +2,10 @@
 
 Rust is a statically typed language, which means it must know the types of all variables at compile time. The compiler can usually infer the type based on the value and how it's used, but sometimes we need to add type annotations.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 3.2: Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) in the official Rust Book.
+
 ## Type Categories
 
 Rust data types are divided into two main categories:

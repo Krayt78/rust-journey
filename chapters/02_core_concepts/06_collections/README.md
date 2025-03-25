@@ -2,6 +2,10 @@
 
 Collections are data structures that can store multiple values. Unlike arrays and tuples, which have a fixed size known at compile time, collections store data on the heap, allowing them to grow or shrink during runtime.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 8: Common Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html) in the official Rust Book.
+
 ## Overview
 
 Rust's standard library includes several powerful collection types that provide different trade-offs in terms of performance, memory usage, and functionality. This chapter covers the most commonly used collections:

@@ -2,6 +2,10 @@
 
 Enums (short for enumerations) allow you to define a type by enumerating its possible variants. They're especially useful when you need to represent data that could be one of several different types or configurations.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 6: Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) in the official Rust Book.
+
 ## Key Concepts
 
 - **Basic Enums**: Creating types with different variants

@@ -2,6 +2,10 @@
 
 As your Rust projects grow in size and complexity, organizing your code becomes increasingly important. This section covers Rust's module system, which provides powerful tools for structuring code into manageable, reusable components.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 7: Managing Growing Projects with Packages, Crates, and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) in the official Rust Book.
+
 ## Section Overview
 
 This section is divided into the following subsections, each focusing on a specific aspect of Rust's module system:

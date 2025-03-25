@@ -2,6 +2,10 @@
 
 Error handling is a critical aspect of writing robust, reliable software. Rust provides a rich set of tools for handling errors in a way that is both safe and expressive.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 9: Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) in the official Rust Book.
+
 ## Why Error Handling Matters
 
 In any non-trivial program, things can go wrong:

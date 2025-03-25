@@ -2,6 +2,10 @@
 
 Integration tests verify that multiple components of your code work together correctly. Unlike unit tests, which test individual functions or methods in isolation, integration tests focus on the interactions between different parts of your code.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 11.3: Test Organization](https://doc.rust-lang.org/book/ch11-03-test-organization.html#integration-tests) in the official Rust Book.
+
 ## Integration Test Structure in Rust
 
 In Rust, integration tests:

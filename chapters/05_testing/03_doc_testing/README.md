@@ -2,6 +2,10 @@
 
 Documentation tests in Rust ensure that your code examples in documentation work correctly. They serve a dual purpose: they provide accurate usage examples for users of your code, and they act as tests to verify that your code works as documented.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 11.2: Controlling How Tests Are Run](https://doc.rust-lang.org/book/ch11-02-running-tests.html) and [Chapter 14.1: Documentation Comments](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#documentation-comments) in the official Rust Book.
+
 ## What Are Documentation Tests?
 
 In Rust, code examples in documentation comments (those marked with `///` or `//!`) are automatically run as tests when you run `cargo test`. This ensures that:

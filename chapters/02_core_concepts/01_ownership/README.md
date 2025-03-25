@@ -2,6 +2,10 @@
 
 Ownership is one of Rust's most unique and important features. It enables Rust to make memory safety guarantees without needing a garbage collector.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 4.1: What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) in the official Rust Book.
+
 ## Key Concepts
 
 - **Ownership Rules**: The foundational rules that govern how memory is managed

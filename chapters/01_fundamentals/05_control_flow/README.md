@@ -1,6 +1,10 @@
 # Control Flow in Rust
 
-Control flow refers to the order in which individual statements, instructions, or function calls are executed or evaluated in a program. Rust provides several ways to control the flow of your program:
+Control flow in programming refers to the order in which statements are executed. Rust provides common control flow constructs like if statements, loops, and match expressions to direct the flow of your program.
+
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 3.5: Control Flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html) in the official Rust Book.
 
 ## Key Concepts
 

@@ -2,6 +2,10 @@
 
 The traditional first program in any language is "Hello, World!", and Rust is no exception. This simple program demonstrates the basic structure of a Rust program and lets us confirm that our Rust installation is working correctly.
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 1.2: Hello, World!](https://doc.rust-lang.org/book/ch01-02-hello-world.html) in the official Rust Book.
+
 ## Key Concepts
 
 - **Basic program structure**: Understanding the `main` function

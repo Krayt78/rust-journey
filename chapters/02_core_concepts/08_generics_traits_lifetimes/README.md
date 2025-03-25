@@ -6,6 +6,10 @@ This chapter covers three of Rust's most powerful features for writing flexible 
 - **Traits** provide shared behavior across different types
 - **Lifetimes** ensure references remain valid for as long as they're needed
 
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 10: Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) in the official Rust Book.
+
 ## Generic Types
 
 Generics are a way to write code that can work with multiple types. Instead of duplicating code for each specific type, you can write a single implementation that works for any type matching your requirements.

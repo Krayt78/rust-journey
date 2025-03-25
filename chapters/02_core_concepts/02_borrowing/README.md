@@ -1,6 +1,10 @@
-# Borrowing in Rust
+# References and Borrowing in Rust
 
-Borrowing is a fundamental concept in Rust that allows you to reference data without taking ownership of it. This solves many of the challenges presented by the ownership system while still maintaining memory safety.
+While ownership gives Rust its memory safety, it would be very limiting if we had to transfer ownership every time we wanted to use a value. Borrowing allows us to reference data without taking ownership of it.
+
+## Corresponding Section in the Rust Book
+
+This section corresponds to [Chapter 4.2: References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) in the official Rust Book.
 
 ## Key Concepts
 

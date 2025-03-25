@@ -2,6 +2,10 @@
 
 Testing is a crucial part of software development that helps ensure your code works as expected and continues to work as you make changes. Rust has built-in support for testing through its test framework, making it easy to write and run tests.
 
+## Corresponding Chapter in the Rust Book
+
+This chapter corresponds to [Chapter 11: Writing Automated Tests](https://doc.rust-lang.org/book/ch11-00-testing.html) in the official Rust Book.
+
 ## Why Testing Matters
 
 - **Verifies correct behavior**: Tests confirm that your code does what it's supposed to do.
