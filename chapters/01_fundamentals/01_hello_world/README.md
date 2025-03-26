@@ -13,70 +13,64 @@ This section corresponds to [Chapter 1.2: Hello, World!](https://doc.rust-lang.o
 - **Macros**: Introduction to Rust's macro system
 - **Compilation**: How to compile and run Rust code
 
-## The Hello World Program
+## Learning Materials
 
-In the file [`hello.rs`](./hello.rs), you'll find a comprehensive "Hello, World!" program with examples and challenges.
+This directory contains several resources to help you learn about Hello World in Rust:
 
-```rust
-fn main() {
-    println!("Hello, World!");
-}
-```
+1. [`challenge.rs`](./challenge.rs) - A Rust program with examples and challenges related to printing text
+2. [`learnings.md`](./learnings.md) - Detailed explanations about printing in Rust
 
-Let's break down what's happening here:
+## Running the Code
 
-1. `fn main()`: This declares a function named `main`. The `main` function is special - it's the entry point of every Rust program.
+### Compiling and Running the Example
 
-2. `println!("Hello, World!")`: This is a call to the `println!` macro, which prints text to the console. Note the exclamation mark (`!`) - this indicates that `println!` is a macro, not a regular function.
-
-## Running Your First Rust Program
-
-To compile and run this program:
+To compile and run the example code in `challenge.rs`:
 
 1. Open a terminal and navigate to this directory
-2. Run the following command:
+2. Compile the code with rustc:
+   ```bash
+   rustc challenge.rs
+   ```
+3. Run the resulting executable:
+   ```bash
+   # On Unix-like systems:
+   ./challenge
 
-```bash
-rustc hello.rs
-```
+   # On Windows:
+   .\challenge.exe
+   ```
+4. You should see the output of the program printed to your terminal
 
-3. This creates an executable file. To run it:
+### Running the Tests
 
-```bash
-# On Unix-like systems:
-./hello
+The challenges in `challenge.rs` include tests to verify your solutions. To run these tests:
 
-# On Windows:
-.\hello.exe
-```
+1. Make sure you have fixed the code in the challenges module
+2. Compile and run the program with:
+   ```bash
+   rustc challenge.rs && ./challenge
+   ```
+   (Use `.\challenge.exe` on Windows)
+3. The program will automatically run the tests and report whether your fixes were successful
 
-You should see the output of the program printed to your terminal.
+## Working with the Challenges
 
-## Learning Through Challenges
+1. Open `challenge.rs` in your editor
+2. Read through the examples at the top to understand the concepts
+3. Find the `challenges` module (around line 40)
+4. Fix each issue in the challenge functions:
+   - `broken_print()`: Fix the println! macro invocation
+   - `print_with_variable()`: Make it print "Hello, Rust!" using the name variable
+   - `print_multiple_values()`: Fix to print values in the requested order
+5. Run the program to verify your solutions pass all the tests
 
-Each file in this course has two parts:
+## Learning the Concepts
 
-1. **Teaching Section**: The top part of each file contains working examples that demonstrate concepts with explanations in comments.
+To understand the concepts being demonstrated:
 
-2. **Challenges Module**: A module at the bottom of each file with intentionally broken code that you need to fix. These challenges test your understanding of the concepts presented in the teaching section.
-
-To complete the challenges:
-1. Read through the teaching section to understand the concepts
-2. Look at the broken code in the challenges module
-3. Fix each issue to make the code compile and run correctly
-4. The code contains validations that will tell you if your fixes are correct
-
-In the `hello.rs` file, you'll find several challenges related to printing:
-- Fixing a broken print statement
-- Printing with variables
-- Formatting output with multiple values
-
-## Your First Challenge
-
-1. Open `hello.rs` and find the `challenges` module
-2. Fix the broken `printline!` macro to make it compile
-3. Update the remaining functions to pass all the tests
-4. Run the program to verify your solutions
+1. Read the detailed explanations in [`learnings.md`](./learnings.md)
+2. Study the working examples in the main function of [`challenge.rs`](./challenge.rs)
+3. Experiment by modifying the examples and observing the results
 
 ## What's Next?
 

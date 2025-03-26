@@ -1,0 +1,19 @@
+[package]
+name = "rust-journey"
+version = "0.1.0"
+edition = "2021"
+authors = ["Rust Journey Author"]
+description = "A comprehensive journey through Rust programming concepts"
+
+[lib]
+name = "rust_journey"
+path = "src/lib.rs"
+
+[dependencies]
+# Any dependencies can be added here when needed
+
+[dev-dependencies]
+# Test dependencies
+
+[features]
+# Optional features can be defined here
