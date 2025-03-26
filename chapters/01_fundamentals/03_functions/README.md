@@ -16,11 +16,12 @@ This section corresponds to [Chapter 3.3: Functions](https://doc.rust-lang.org/b
 
 ## Learning Path
 
-1. Start with [`basic_functions.rs`](./basic_functions.rs) to learn how to define and call functions
-2. Move on to [`function_parameters.rs`](./function_parameters.rs) to understand how to pass data to functions
-3. Continue with [`return_values.rs`](./return_values.rs) to learn how functions can return data
-4. Explore [`function_expressions.rs`](./function_expressions.rs) to understand expressions in function bodies
-5. Complete [`advanced_functions.rs`](./advanced_functions.rs) to learn about more complex function concepts
+This section is organized into progressive folders, each exploring a different aspect of functions in Rust:
+
+1. Start with [`0_basic_functions`](./0_basic_functions/) to learn how to define and call functions
+2. Move on to [`1_function_parameters`](./1_function_parameters/) to understand how to pass data to functions
+3. Continue with [`2_return_values`](./2_return_values/) to learn how functions can return data
+4. Explore [`3_function_expressions`](./3_function_expressions/) to understand expressions in function bodies
 
 ## Why Functions Matter
 
@@ -30,14 +31,18 @@ Functions allow you to:
 - Isolate functionality to make testing and debugging easier
 - Create abstractions that hide implementation details
 
-## Learning Through Challenges
+## Learning Structure
 
-Each file in this section follows the same pattern:
+Each subfolder in this section follows the same pattern:
 
-1. **Teaching Section**: Examples with detailed explanations in comments
-2. **Challenges Module**: Code with intentional errors for you to fix
-3. **Tests**: Validation code to verify your solutions
+1. **README.md**: An overview of the specific function concept with instructions
+2. **challenge.rs**: Code examples with intentional errors for you to fix
+3. **learnings.md**: Detailed explanations of the concepts with clear examples
 
-Fix each issue to make the code compile and run correctly. The tests will tell you if your fixes work.
+To get the most out of each topic:
+1. Read the README.md file first to understand the concept
+2. Study the detailed explanations in learnings.md
+3. Work through the challenges in challenge.rs
+4. Experiment by making your own modifications to reinforce learning
 
 Happy coding! Remember that making mistakes and fixing them is one of the best ways to learn.
