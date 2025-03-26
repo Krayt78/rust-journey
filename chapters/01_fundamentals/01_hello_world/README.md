@@ -10,7 +10,6 @@ This section corresponds to [Chapter 1.2: Hello, World!](https://doc.rust-lang.o
 
 - **Basic program structure**: Understanding the `main` function
 - **Output**: Using the `println!` macro
-- **Macros**: Introduction to Rust's macro system
 - **Compilation**: How to compile and run Rust code
 
 ## Learning Materials

@@ -6,12 +6,12 @@
 pub mod fundamentals {
     /// Hello World examples and exercises
     pub mod hello_world {
-        include!("../chapters/01_fundamentals/01_hello_world/0_hello.rs");
+        include!("../chapters/01_fundamentals/01_hello_world/challenge.rs");
     }
     
     /// Variables and mutability examples and exercises
     pub mod variables {
-        include!("../chapters/01_fundamentals/02_variables/0_variables.rs");
+        include!("../chapters/01_fundamentals/02_variables/challenge.rs");
     }
     
     /// Data types examples and exercises
